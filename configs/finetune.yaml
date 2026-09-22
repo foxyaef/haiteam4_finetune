@@ -1,5 +1,5 @@
 seed: 42
-device: xpu
+device: cuda
 input_size: 640
 epochs: 50
 batch_size: 1

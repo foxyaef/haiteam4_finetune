@@ -1,0 +1,8 @@
+.venv/
+data/
+weights/
+runs/
+vendor/
+__pycache__/
+*.pyc
+

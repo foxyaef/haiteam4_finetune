@@ -1,0 +1,19 @@
+{
+  "ram_bytes": 16687763456,
+  "gpu": [
+    {
+      "Name": "AnyViewerIddDriver Device",
+      "DriverVersion": "16.20.27.108"
+    },
+    {
+      "Name": "Intel(R) Arc(TM) 130V GPU (8GB)",
+      "DriverVersion": "32.0.101.8626"
+    }
+  ],
+  "cpu": {
+    "Name": "Intel(R) Core(TM) Ultra 5 226V",
+    "NumberOfCores": 8,
+    "NumberOfLogicalProcessors": 8
+  },
+  "captured_at": "2026-09-21T18:09:03.4179956+09:00"
+}

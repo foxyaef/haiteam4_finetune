@@ -1,0 +1,55 @@
+{
+  "status": "ready",
+  "train_images": 70000,
+  "val_images": 10000,
+  "train_val_overlap": 0,
+  "calibration_images": 512,
+  "calibration_val_overlap": 0,
+  "real_image_forward_pass": "passed",
+  "device": "xpu",
+  "input": [
+    1,
+    3,
+    640,
+    640
+  ],
+  "tested_image": "b1c66a42-6f7d68ca.jpg",
+  "detections": 300,
+  "trained_on_bdd100k": false,
+  "source_release": "Berkeley official original Labels, not Detection 2020",
+  "box_coordinate_convention": "scalabel_inclusive",
+  "dataset_manifest_sha256": "93b04dfd5863cabd7f4995289f5798491da0ce7da3e1f0a804f21b9892ea148f",
+  "class_counts": {
+    "train": {
+      "traffic light": 186301,
+      "traffic sign": 239961,
+      "car": 714120,
+      "pedestrian": 91435,
+      "bus": 11688,
+      "truck": 30012,
+      "rider": 4522,
+      "bicycle": 7227,
+      "motorcycle": 3002,
+      "train": 136
+    },
+    "val": {
+      "traffic sign": 34915,
+      "traffic light": 26891,
+      "car": 102540,
+      "rider": 649,
+      "motorcycle": 452,
+      "pedestrian": 13265,
+      "bus": 1597,
+      "truck": 4247,
+      "bicycle": 1007,
+      "train": 15
+    }
+  },
+  "filtered_boxes": {
+    "train": {
+      "boxes_without_area_inside_image": 1
+    },
+    "val": {}
+  },
+  "completed_at": "2026-09-21T23:42:10+0900"
+}

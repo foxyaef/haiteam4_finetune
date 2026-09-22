@@ -1,0 +1,3497 @@
+[
+  {
+    "name": "backbone.conv1.conv1_1.conv.weight",
+    "group": "backbone",
+    "shape": [
+      32,
+      3,
+      3,
+      3
+    ],
+    "parameters": 864
+  },
+  {
+    "name": "backbone.conv1.conv1_2.conv.weight",
+    "group": "backbone",
+    "shape": [
+      32,
+      32,
+      3,
+      3
+    ],
+    "parameters": 9216
+  },
+  {
+    "name": "backbone.conv1.conv1_3.conv.weight",
+    "group": "backbone",
+    "shape": [
+      64,
+      32,
+      3,
+      3
+    ],
+    "parameters": 18432
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.0.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      64,
+      64,
+      1,
+      1
+    ],
+    "parameters": 4096
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.0.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "parameters": 36864
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.0.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      64,
+      1,
+      1
+    ],
+    "parameters": 16384
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.0.short.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      64,
+      1,
+      1
+    ],
+    "parameters": 16384
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.1.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      64,
+      256,
+      1,
+      1
+    ],
+    "parameters": 16384
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.1.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "parameters": 36864
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.1.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      64,
+      1,
+      1
+    ],
+    "parameters": 16384
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.2.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      64,
+      256,
+      1,
+      1
+    ],
+    "parameters": 16384
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.2.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      64,
+      64,
+      3,
+      3
+    ],
+    "parameters": 36864
+  },
+  {
+    "name": "backbone.res_layers.0.blocks.2.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      64,
+      1,
+      1
+    ],
+    "parameters": 16384
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.0.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      128,
+      256,
+      1,
+      1
+    ],
+    "parameters": 32768
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.0.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "parameters": 147456
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.0.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      128,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.0.short.conv.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      256,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.1.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      128,
+      512,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.1.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "parameters": 147456
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.1.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      128,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.2.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      128,
+      512,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.2.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "parameters": 147456
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.2.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      128,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.3.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      128,
+      512,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.3.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      128,
+      128,
+      3,
+      3
+    ],
+    "parameters": 147456
+  },
+  {
+    "name": "backbone.res_layers.1.blocks.3.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      128,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.0.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.0.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.0.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      1024,
+      256,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.0.short.conv.conv.weight",
+    "group": "backbone",
+    "shape": [
+      1024,
+      512,
+      1,
+      1
+    ],
+    "parameters": 524288
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.1.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      1024,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.1.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.1.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      1024,
+      256,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.2.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      1024,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.2.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.2.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      1024,
+      256,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.3.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      1024,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.3.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.3.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      1024,
+      256,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.4.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      1024,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.4.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.4.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      1024,
+      256,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.5.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      1024,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.5.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "backbone.res_layers.2.blocks.5.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      1024,
+      256,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.0.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      1024,
+      1,
+      1
+    ],
+    "parameters": 524288
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.0.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "parameters": 2359296
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.0.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      2048,
+      512,
+      1,
+      1
+    ],
+    "parameters": 1048576
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.0.short.conv.conv.weight",
+    "group": "backbone",
+    "shape": [
+      2048,
+      1024,
+      1,
+      1
+    ],
+    "parameters": 2097152
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.1.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      2048,
+      1,
+      1
+    ],
+    "parameters": 1048576
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.1.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "parameters": 2359296
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.1.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      2048,
+      512,
+      1,
+      1
+    ],
+    "parameters": 1048576
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.2.branch2a.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      2048,
+      1,
+      1
+    ],
+    "parameters": 1048576
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.2.branch2b.conv.weight",
+    "group": "backbone",
+    "shape": [
+      512,
+      512,
+      3,
+      3
+    ],
+    "parameters": 2359296
+  },
+  {
+    "name": "backbone.res_layers.3.blocks.2.branch2c.conv.weight",
+    "group": "backbone",
+    "shape": [
+      2048,
+      512,
+      1,
+      1
+    ],
+    "parameters": 1048576
+  },
+  {
+    "name": "decoder.input_proj.0.conv.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.input_proj.0.norm.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.input_proj.0.norm.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.input_proj.1.conv.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.input_proj.1.norm.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.input_proj.1.norm.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.input_proj.2.conv.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.input_proj.2.norm.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.input_proj.2.norm.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.self_attn.in_proj_weight",
+    "group": "decoder",
+    "shape": [
+      768,
+      256
+    ],
+    "parameters": 196608
+  },
+  {
+    "name": "decoder.decoder.layers.0.self_attn.in_proj_bias",
+    "group": "decoder",
+    "shape": [
+      768
+    ],
+    "parameters": 768
+  },
+  {
+    "name": "decoder.decoder.layers.0.self_attn.out_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.0.self_attn.out_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.norm1.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.norm1.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.cross_attn.sampling_offsets.weight",
+    "group": "decoder",
+    "shape": [
+      192,
+      256
+    ],
+    "parameters": 49152
+  },
+  {
+    "name": "decoder.decoder.layers.0.cross_attn.sampling_offsets.bias",
+    "group": "decoder",
+    "shape": [
+      192
+    ],
+    "parameters": 192
+  },
+  {
+    "name": "decoder.decoder.layers.0.cross_attn.attention_weights.weight",
+    "group": "decoder",
+    "shape": [
+      96,
+      256
+    ],
+    "parameters": 24576
+  },
+  {
+    "name": "decoder.decoder.layers.0.cross_attn.attention_weights.bias",
+    "group": "decoder",
+    "shape": [
+      96
+    ],
+    "parameters": 96
+  },
+  {
+    "name": "decoder.decoder.layers.0.cross_attn.value_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.0.cross_attn.value_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.cross_attn.output_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.0.cross_attn.output_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.norm2.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.norm2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.linear1.weight",
+    "group": "decoder",
+    "shape": [
+      1024,
+      256
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.0.linear1.bias",
+    "group": "decoder",
+    "shape": [
+      1024
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.decoder.layers.0.linear2.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      1024
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.0.linear2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.norm3.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.0.norm3.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.self_attn.in_proj_weight",
+    "group": "decoder",
+    "shape": [
+      768,
+      256
+    ],
+    "parameters": 196608
+  },
+  {
+    "name": "decoder.decoder.layers.1.self_attn.in_proj_bias",
+    "group": "decoder",
+    "shape": [
+      768
+    ],
+    "parameters": 768
+  },
+  {
+    "name": "decoder.decoder.layers.1.self_attn.out_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.1.self_attn.out_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.norm1.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.norm1.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.cross_attn.sampling_offsets.weight",
+    "group": "decoder",
+    "shape": [
+      192,
+      256
+    ],
+    "parameters": 49152
+  },
+  {
+    "name": "decoder.decoder.layers.1.cross_attn.sampling_offsets.bias",
+    "group": "decoder",
+    "shape": [
+      192
+    ],
+    "parameters": 192
+  },
+  {
+    "name": "decoder.decoder.layers.1.cross_attn.attention_weights.weight",
+    "group": "decoder",
+    "shape": [
+      96,
+      256
+    ],
+    "parameters": 24576
+  },
+  {
+    "name": "decoder.decoder.layers.1.cross_attn.attention_weights.bias",
+    "group": "decoder",
+    "shape": [
+      96
+    ],
+    "parameters": 96
+  },
+  {
+    "name": "decoder.decoder.layers.1.cross_attn.value_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.1.cross_attn.value_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.cross_attn.output_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.1.cross_attn.output_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.norm2.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.norm2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.linear1.weight",
+    "group": "decoder",
+    "shape": [
+      1024,
+      256
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.1.linear1.bias",
+    "group": "decoder",
+    "shape": [
+      1024
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.decoder.layers.1.linear2.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      1024
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.1.linear2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.norm3.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.1.norm3.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.self_attn.in_proj_weight",
+    "group": "decoder",
+    "shape": [
+      768,
+      256
+    ],
+    "parameters": 196608
+  },
+  {
+    "name": "decoder.decoder.layers.2.self_attn.in_proj_bias",
+    "group": "decoder",
+    "shape": [
+      768
+    ],
+    "parameters": 768
+  },
+  {
+    "name": "decoder.decoder.layers.2.self_attn.out_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.2.self_attn.out_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.norm1.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.norm1.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.cross_attn.sampling_offsets.weight",
+    "group": "decoder",
+    "shape": [
+      192,
+      256
+    ],
+    "parameters": 49152
+  },
+  {
+    "name": "decoder.decoder.layers.2.cross_attn.sampling_offsets.bias",
+    "group": "decoder",
+    "shape": [
+      192
+    ],
+    "parameters": 192
+  },
+  {
+    "name": "decoder.decoder.layers.2.cross_attn.attention_weights.weight",
+    "group": "decoder",
+    "shape": [
+      96,
+      256
+    ],
+    "parameters": 24576
+  },
+  {
+    "name": "decoder.decoder.layers.2.cross_attn.attention_weights.bias",
+    "group": "decoder",
+    "shape": [
+      96
+    ],
+    "parameters": 96
+  },
+  {
+    "name": "decoder.decoder.layers.2.cross_attn.value_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.2.cross_attn.value_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.cross_attn.output_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.2.cross_attn.output_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.norm2.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.norm2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.linear1.weight",
+    "group": "decoder",
+    "shape": [
+      1024,
+      256
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.2.linear1.bias",
+    "group": "decoder",
+    "shape": [
+      1024
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.decoder.layers.2.linear2.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      1024
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.2.linear2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.norm3.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.2.norm3.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.self_attn.in_proj_weight",
+    "group": "decoder",
+    "shape": [
+      768,
+      256
+    ],
+    "parameters": 196608
+  },
+  {
+    "name": "decoder.decoder.layers.3.self_attn.in_proj_bias",
+    "group": "decoder",
+    "shape": [
+      768
+    ],
+    "parameters": 768
+  },
+  {
+    "name": "decoder.decoder.layers.3.self_attn.out_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.3.self_attn.out_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.norm1.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.norm1.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.cross_attn.sampling_offsets.weight",
+    "group": "decoder",
+    "shape": [
+      192,
+      256
+    ],
+    "parameters": 49152
+  },
+  {
+    "name": "decoder.decoder.layers.3.cross_attn.sampling_offsets.bias",
+    "group": "decoder",
+    "shape": [
+      192
+    ],
+    "parameters": 192
+  },
+  {
+    "name": "decoder.decoder.layers.3.cross_attn.attention_weights.weight",
+    "group": "decoder",
+    "shape": [
+      96,
+      256
+    ],
+    "parameters": 24576
+  },
+  {
+    "name": "decoder.decoder.layers.3.cross_attn.attention_weights.bias",
+    "group": "decoder",
+    "shape": [
+      96
+    ],
+    "parameters": 96
+  },
+  {
+    "name": "decoder.decoder.layers.3.cross_attn.value_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.3.cross_attn.value_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.cross_attn.output_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.3.cross_attn.output_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.norm2.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.norm2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.linear1.weight",
+    "group": "decoder",
+    "shape": [
+      1024,
+      256
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.3.linear1.bias",
+    "group": "decoder",
+    "shape": [
+      1024
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.decoder.layers.3.linear2.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      1024
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.3.linear2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.norm3.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.3.norm3.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.self_attn.in_proj_weight",
+    "group": "decoder",
+    "shape": [
+      768,
+      256
+    ],
+    "parameters": 196608
+  },
+  {
+    "name": "decoder.decoder.layers.4.self_attn.in_proj_bias",
+    "group": "decoder",
+    "shape": [
+      768
+    ],
+    "parameters": 768
+  },
+  {
+    "name": "decoder.decoder.layers.4.self_attn.out_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.4.self_attn.out_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.norm1.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.norm1.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.cross_attn.sampling_offsets.weight",
+    "group": "decoder",
+    "shape": [
+      192,
+      256
+    ],
+    "parameters": 49152
+  },
+  {
+    "name": "decoder.decoder.layers.4.cross_attn.sampling_offsets.bias",
+    "group": "decoder",
+    "shape": [
+      192
+    ],
+    "parameters": 192
+  },
+  {
+    "name": "decoder.decoder.layers.4.cross_attn.attention_weights.weight",
+    "group": "decoder",
+    "shape": [
+      96,
+      256
+    ],
+    "parameters": 24576
+  },
+  {
+    "name": "decoder.decoder.layers.4.cross_attn.attention_weights.bias",
+    "group": "decoder",
+    "shape": [
+      96
+    ],
+    "parameters": 96
+  },
+  {
+    "name": "decoder.decoder.layers.4.cross_attn.value_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.4.cross_attn.value_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.cross_attn.output_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.4.cross_attn.output_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.norm2.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.norm2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.linear1.weight",
+    "group": "decoder",
+    "shape": [
+      1024,
+      256
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.4.linear1.bias",
+    "group": "decoder",
+    "shape": [
+      1024
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.decoder.layers.4.linear2.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      1024
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.4.linear2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.norm3.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.4.norm3.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.self_attn.in_proj_weight",
+    "group": "decoder",
+    "shape": [
+      768,
+      256
+    ],
+    "parameters": 196608
+  },
+  {
+    "name": "decoder.decoder.layers.5.self_attn.in_proj_bias",
+    "group": "decoder",
+    "shape": [
+      768
+    ],
+    "parameters": 768
+  },
+  {
+    "name": "decoder.decoder.layers.5.self_attn.out_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.5.self_attn.out_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.norm1.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.norm1.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.cross_attn.sampling_offsets.weight",
+    "group": "decoder",
+    "shape": [
+      192,
+      256
+    ],
+    "parameters": 49152
+  },
+  {
+    "name": "decoder.decoder.layers.5.cross_attn.sampling_offsets.bias",
+    "group": "decoder",
+    "shape": [
+      192
+    ],
+    "parameters": 192
+  },
+  {
+    "name": "decoder.decoder.layers.5.cross_attn.attention_weights.weight",
+    "group": "decoder",
+    "shape": [
+      96,
+      256
+    ],
+    "parameters": 24576
+  },
+  {
+    "name": "decoder.decoder.layers.5.cross_attn.attention_weights.bias",
+    "group": "decoder",
+    "shape": [
+      96
+    ],
+    "parameters": 96
+  },
+  {
+    "name": "decoder.decoder.layers.5.cross_attn.value_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.5.cross_attn.value_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.cross_attn.output_proj.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.decoder.layers.5.cross_attn.output_proj.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.norm2.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.norm2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.linear1.weight",
+    "group": "decoder",
+    "shape": [
+      1024,
+      256
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.5.linear1.bias",
+    "group": "decoder",
+    "shape": [
+      1024
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.decoder.layers.5.linear2.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      1024
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "decoder.decoder.layers.5.linear2.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.norm3.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.decoder.layers.5.norm3.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.denoising_class_embed.weight",
+    "group": "decoder",
+    "shape": [
+      11,
+      256
+    ],
+    "parameters": 2816
+  },
+  {
+    "name": "decoder.query_pos_head.layers.0.weight",
+    "group": "decoder",
+    "shape": [
+      512,
+      4
+    ],
+    "parameters": 2048
+  },
+  {
+    "name": "decoder.query_pos_head.layers.0.bias",
+    "group": "decoder",
+    "shape": [
+      512
+    ],
+    "parameters": 512
+  },
+  {
+    "name": "decoder.query_pos_head.layers.1.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      512
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "decoder.query_pos_head.layers.1.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.enc_output.0.weight",
+    "group": "decoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.enc_output.0.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.enc_output.1.weight",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.enc_output.1.bias",
+    "group": "decoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.enc_score_head.weight",
+    "group": "head",
+    "shape": [
+      10,
+      256
+    ],
+    "parameters": 2560
+  },
+  {
+    "name": "decoder.enc_score_head.bias",
+    "group": "head",
+    "shape": [
+      10
+    ],
+    "parameters": 10
+  },
+  {
+    "name": "decoder.enc_bbox_head.layers.0.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.enc_bbox_head.layers.0.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.enc_bbox_head.layers.1.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.enc_bbox_head.layers.1.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.enc_bbox_head.layers.2.weight",
+    "group": "head",
+    "shape": [
+      4,
+      256
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.enc_bbox_head.layers.2.bias",
+    "group": "head",
+    "shape": [
+      4
+    ],
+    "parameters": 4
+  },
+  {
+    "name": "decoder.dec_score_head.0.weight",
+    "group": "head",
+    "shape": [
+      10,
+      256
+    ],
+    "parameters": 2560
+  },
+  {
+    "name": "decoder.dec_score_head.0.bias",
+    "group": "head",
+    "shape": [
+      10
+    ],
+    "parameters": 10
+  },
+  {
+    "name": "decoder.dec_score_head.1.weight",
+    "group": "head",
+    "shape": [
+      10,
+      256
+    ],
+    "parameters": 2560
+  },
+  {
+    "name": "decoder.dec_score_head.1.bias",
+    "group": "head",
+    "shape": [
+      10
+    ],
+    "parameters": 10
+  },
+  {
+    "name": "decoder.dec_score_head.2.weight",
+    "group": "head",
+    "shape": [
+      10,
+      256
+    ],
+    "parameters": 2560
+  },
+  {
+    "name": "decoder.dec_score_head.2.bias",
+    "group": "head",
+    "shape": [
+      10
+    ],
+    "parameters": 10
+  },
+  {
+    "name": "decoder.dec_score_head.3.weight",
+    "group": "head",
+    "shape": [
+      10,
+      256
+    ],
+    "parameters": 2560
+  },
+  {
+    "name": "decoder.dec_score_head.3.bias",
+    "group": "head",
+    "shape": [
+      10
+    ],
+    "parameters": 10
+  },
+  {
+    "name": "decoder.dec_score_head.4.weight",
+    "group": "head",
+    "shape": [
+      10,
+      256
+    ],
+    "parameters": 2560
+  },
+  {
+    "name": "decoder.dec_score_head.4.bias",
+    "group": "head",
+    "shape": [
+      10
+    ],
+    "parameters": 10
+  },
+  {
+    "name": "decoder.dec_score_head.5.weight",
+    "group": "head",
+    "shape": [
+      10,
+      256
+    ],
+    "parameters": 2560
+  },
+  {
+    "name": "decoder.dec_score_head.5.bias",
+    "group": "head",
+    "shape": [
+      10
+    ],
+    "parameters": 10
+  },
+  {
+    "name": "decoder.dec_bbox_head.0.layers.0.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.0.layers.0.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.0.layers.1.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.0.layers.1.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.0.layers.2.weight",
+    "group": "head",
+    "shape": [
+      4,
+      256
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.dec_bbox_head.0.layers.2.bias",
+    "group": "head",
+    "shape": [
+      4
+    ],
+    "parameters": 4
+  },
+  {
+    "name": "decoder.dec_bbox_head.1.layers.0.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.1.layers.0.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.1.layers.1.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.1.layers.1.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.1.layers.2.weight",
+    "group": "head",
+    "shape": [
+      4,
+      256
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.dec_bbox_head.1.layers.2.bias",
+    "group": "head",
+    "shape": [
+      4
+    ],
+    "parameters": 4
+  },
+  {
+    "name": "decoder.dec_bbox_head.2.layers.0.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.2.layers.0.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.2.layers.1.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.2.layers.1.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.2.layers.2.weight",
+    "group": "head",
+    "shape": [
+      4,
+      256
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.dec_bbox_head.2.layers.2.bias",
+    "group": "head",
+    "shape": [
+      4
+    ],
+    "parameters": 4
+  },
+  {
+    "name": "decoder.dec_bbox_head.3.layers.0.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.3.layers.0.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.3.layers.1.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.3.layers.1.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.3.layers.2.weight",
+    "group": "head",
+    "shape": [
+      4,
+      256
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.dec_bbox_head.3.layers.2.bias",
+    "group": "head",
+    "shape": [
+      4
+    ],
+    "parameters": 4
+  },
+  {
+    "name": "decoder.dec_bbox_head.4.layers.0.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.4.layers.0.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.4.layers.1.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.4.layers.1.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.4.layers.2.weight",
+    "group": "head",
+    "shape": [
+      4,
+      256
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.dec_bbox_head.4.layers.2.bias",
+    "group": "head",
+    "shape": [
+      4
+    ],
+    "parameters": 4
+  },
+  {
+    "name": "decoder.dec_bbox_head.5.layers.0.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.5.layers.0.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.5.layers.1.weight",
+    "group": "head",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "decoder.dec_bbox_head.5.layers.1.bias",
+    "group": "head",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "decoder.dec_bbox_head.5.layers.2.weight",
+    "group": "head",
+    "shape": [
+      4,
+      256
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "decoder.dec_bbox_head.5.layers.2.bias",
+    "group": "head",
+    "shape": [
+      4
+    ],
+    "parameters": 4
+  },
+  {
+    "name": "encoder.input_proj.0.0.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.input_proj.0.1.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.input_proj.0.1.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.input_proj.1.0.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      1024,
+      1,
+      1
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "encoder.input_proj.1.1.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.input_proj.1.1.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.input_proj.2.0.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      2048,
+      1,
+      1
+    ],
+    "parameters": 524288
+  },
+  {
+    "name": "encoder.input_proj.2.1.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.input_proj.2.1.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.self_attn.in_proj_weight",
+    "group": "encoder",
+    "shape": [
+      768,
+      256
+    ],
+    "parameters": 196608
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.self_attn.in_proj_bias",
+    "group": "encoder",
+    "shape": [
+      768
+    ],
+    "parameters": 768
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.self_attn.out_proj.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.self_attn.out_proj.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.linear1.weight",
+    "group": "encoder",
+    "shape": [
+      1024,
+      256
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.linear1.bias",
+    "group": "encoder",
+    "shape": [
+      1024
+    ],
+    "parameters": 1024
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.linear2.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      1024
+    ],
+    "parameters": 262144
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.linear2.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.norm1.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.norm1.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.norm2.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.encoder.0.layers.0.norm2.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.lateral_convs.0.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.lateral_convs.0.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.lateral_convs.0.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.lateral_convs.1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.lateral_convs.1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.lateral_convs.1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.fpn_blocks.0.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.fpn_blocks.0.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.0.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.0.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.0.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.0.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.0.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.0.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.1.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.1.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.1.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.1.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.1.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.1.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.2.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.2.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.2.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.2.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.2.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.0.bottlenecks.2.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.fpn_blocks.1.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.fpn_blocks.1.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.0.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.0.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.0.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.0.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.0.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.0.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.1.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.1.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.1.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.1.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.1.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.1.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.2.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.2.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.2.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.2.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.2.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.fpn_blocks.1.bottlenecks.2.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.downsample_convs.0.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.downsample_convs.0.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.downsample_convs.0.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.downsample_convs.1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.downsample_convs.1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.downsample_convs.1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.pan_blocks.0.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.pan_blocks.0.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.0.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.0.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.0.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.0.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.0.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.0.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.1.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.1.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.1.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.1.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.1.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.1.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.2.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.2.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.2.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.2.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.2.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.0.bottlenecks.2.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.pan_blocks.1.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      512,
+      1,
+      1
+    ],
+    "parameters": 131072
+  },
+  {
+    "name": "encoder.pan_blocks.1.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.0.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.0.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.0.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.0.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.0.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.0.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.1.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.1.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.1.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.1.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.1.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.1.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.2.conv1.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      3,
+      3
+    ],
+    "parameters": 589824
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.2.conv1.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.2.conv1.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.2.conv2.conv.weight",
+    "group": "encoder",
+    "shape": [
+      256,
+      256,
+      1,
+      1
+    ],
+    "parameters": 65536
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.2.conv2.norm.weight",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  },
+  {
+    "name": "encoder.pan_blocks.1.bottlenecks.2.conv2.norm.bias",
+    "group": "encoder",
+    "shape": [
+      256
+    ],
+    "parameters": 256
+  }
+]

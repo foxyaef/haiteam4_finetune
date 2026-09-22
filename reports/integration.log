@@ -1,0 +1,78 @@
+
+Epoch 1/2:   0%|          | 0/2 [00:00<?, ?it/s]C:\Users\07lee\OneDrive\바탕 화면\학교\1학년\hai\_pj\_2\.venv\Lib\site-packages\torch\autograd\graph.py:829: UserWarning: grid_sampler_2d_backward_xpu does not have a deterministic implementation, but you set 'torch.use_deterministic_algorithms(True, warn_only=True)'. You can file an issue at https://github.com/pytorch/pytorch/issues to help us prioritize adding deterministic support for this operation. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\Context.cpp:97.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+
+Epoch 1/2:   0%|          | 0/2 [00:11<?, ?it/s, loss=49.411]
+Epoch 1/2:  50%|█████     | 1/2 [00:11<00:11, 11.03s/it, loss=49.411]
+Epoch 1/2:  50%|█████     | 1/2 [00:12<00:11, 11.03s/it, loss=58.434]
+Epoch 1/2: 100%|██████████| 2/2 [00:12<00:00,  5.47s/it, loss=58.434]
+Epoch 1/2: 100%|██████████| 2/2 [00:12<00:00,  6.31s/it, loss=58.434]
+
+Validation FP32:   0%|          | 0/2 [00:00<?, ?it/s]
+Validation FP32:  50%|█████     | 1/2 [00:00<00:00,  1.28it/s]
+Validation FP32: 100%|██████████| 2/2 [00:00<00:00,  2.22it/s]
+Validation FP32: 100%|██████████| 2/2 [00:00<00:00,  2.00it/s]
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.00s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.01s).
+Accumulating evaluation results...
+DONE (t=0.00s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.017
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.167
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.025
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.050
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.050
+
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.050
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.050
+Epoch 2/2:   0%|          | 0/2 [00:00<?, ?it/s]
+Epoch 2/2:   0%|          | 0/2 [00:01<?, ?it/s, loss=52.574]
+Epoch 2/2:  50%|█████     | 1/2 [00:01<00:01,  1.23s/it, loss=52.574]
+Epoch 2/2:  50%|█████     | 1/2 [00:02<00:01,  1.23s/it, loss=46.980]
+Epoch 2/2: 100%|██████████| 2/2 [00:02<00:00,  1.53s/it, loss=46.980]
+Epoch 2/2: 100%|██████████| 2/2 [00:02<00:00,  1.48s/it, loss=46.980]
+
+Validation FP32:   0%|          | 0/2 [00:00<?, ?it/s]
+Validation FP32:  50%|█████     | 1/2 [00:00<00:00,  2.72it/s]
+Validation FP32: 100%|██████████| 2/2 [00:00<00:00,  3.06it/s]
+Validation FP32: 100%|██████████| 2/2 [00:00<00:00,  3.00it/s]
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+Loading and preparing results...
+DONE (t=0.00s)
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.01s).
+Accumulating evaluation results...
+DONE (t=0.01s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.006
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.045
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.009
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.050
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.300
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.300
+{"epoch": 2, "train_loss_total": 49.777170181274414, "train_loss_main": 3.558130145072937, "validation_loss_main": 4.040196657180786, "mAP50_95": 0.005759023354564755, "mAP50": 0.04485138004246284, "precision": null, "recall": 0.0, "lr": 1.0000000000000002e-06, "seconds": 3.6745103000012023}
+INTEGRATION PASSED

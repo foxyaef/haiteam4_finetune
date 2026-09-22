@@ -1,0 +1,21 @@
+{
+  "device": "xpu",
+  "batch_size": 1,
+  "input": [
+    640,
+    640
+  ],
+  "precision": "fp32",
+  "scope": "preloaded random input; model forward + postprocessor; excludes disk/decode/resize/host transfer",
+  "warmup": 2,
+  "iterations": 5,
+  "latency_ms_mean": 201.90519999996468,
+  "latency_ms_p50": 197.8875999993761,
+  "latency_ms_p95": 222.46659999982512,
+  "fps": 4.952819441996417,
+  "checkpoint_bytes": 171741695,
+  "tensor_bytes": 171502424,
+  "peak_process_rss_bytes_sampled": 2895192064,
+  "peak_device_allocated_bytes": 330224640,
+  "checkpoint_sha256": "0422fd7f8259f6063f0b0551b3e92c283a08a457b901364ac64b9b311c16e067"
+}

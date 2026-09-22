@@ -1,0 +1,8 @@
+{"phase": "downloading", "file": "bdd100k_images_100k.zip", "downloaded_gb": 5.397, "total_gb": 5.669, "percent": 95.2, "elapsed_seconds": 0, "mb_per_second": 0.0, "updated_at": "2026-09-21T23:27:42+0900"}
+{"phase": "downloading", "file": "bdd100k_images_100k.zip", "downloaded_gb": 5.452, "total_gb": 5.669, "percent": 96.2, "elapsed_seconds": 15, "mb_per_second": 3.63, "updated_at": "2026-09-21T23:27:57+0900"}
+{"phase": "downloading", "file": "bdd100k_images_100k.zip", "downloaded_gb": 5.511, "total_gb": 5.669, "percent": 97.2, "elapsed_seconds": 30, "mb_per_second": 3.77, "updated_at": "2026-09-21T23:28:13+0900"}
+{"phase": "downloading", "file": "bdd100k_images_100k.zip", "downloaded_gb": 5.59, "total_gb": 5.669, "percent": 98.6, "elapsed_seconds": 45, "mb_per_second": 4.28, "updated_at": "2026-09-21T23:28:28+0900"}
+{"phase": "downloading", "file": "bdd100k_images_100k.zip", "downloaded_gb": 5.652, "total_gb": 5.669, "percent": 99.7, "elapsed_seconds": 60, "mb_per_second": 4.24, "updated_at": "2026-09-21T23:28:43+0900"}
+{"phase": "downloading", "file": "bdd100k_images_100k.zip", "downloaded_gb": 5.663, "total_gb": 5.669, "percent": 99.9, "elapsed_seconds": 75, "mb_per_second": 3.53, "updated_at": "2026-09-21T23:28:58+0900"}
+{"phase": "assembling_and_hashing", "file": "bdd100k_images_100k.zip", "percent": 100, "updated_at": "2026-09-21T23:29:13+0900"}
+{"phase": "complete", "file": "bdd100k_images_100k.zip", "url": "http://128.32.162.150/bdd100k/bdd100k_images_100k.zip", "bytes": 5669071832, "etag": "\"67a4eb02-151e72bd8\"", "last_modified": "Thu, 06 Feb 2025 17:01:54 GMT", "sha256": "afd149eadb49657ef5ad7bb6e9d77cc8b7927a576ee2b475b720028274e02784", "retrieved_at": "2026-09-21T23:29:30+0900", "updated_at": "2026-09-21T23:29:30+0900"}

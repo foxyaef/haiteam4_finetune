@@ -1,0 +1,19 @@
+{
+  "archive": {
+    "url": "http://128.32.162.150/bdd100k/bdd100k_images_100k.zip",
+    "bytes": 5669071832,
+    "etag": "\"67a4eb02-151e72bd8\"",
+    "last_modified": "Thu, 06 Feb 2025 17:01:54 GMT",
+    "sha256": "afd149eadb49657ef5ad7bb6e9d77cc8b7927a576ee2b475b720028274e02784",
+    "retrieved_at": "2026-09-21T23:29:30+0900"
+  },
+  "extracted": {
+    "train": 70000,
+    "val": 10000
+  },
+  "new_files": 80000,
+  "verified_existing": 0,
+  "test_images": "20,000 retained only in original ZIP; not extracted or used for training/evaluation",
+  "image_manifest_sha256": "48b771f8124791afe625cc61267419f4291d5d57197ea68f31b9a3d3d07085d5",
+  "crc_verified": true
+}

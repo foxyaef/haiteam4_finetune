@@ -1,4 +1,5 @@
 .venv/
+.devdeps/
 data/
 weights/
 results/
@@ -9,3 +10,4 @@ vendor/
 *.pt
 *.onnx
 submissions/
+uploaded_models/

@@ -1,0 +1,17 @@
+{
+  "model": "official RT-DETR v1 R50-vd COCO pretrained, unchanged",
+  "source_split": "COCO 2017 val",
+  "seed": 42,
+  "calibration_images": 512,
+  "evaluation_images": 1000,
+  "input_size": 640,
+  "color": "RGB",
+  "resize": "bilinear",
+  "input_range": "0..1",
+  "category_count": 80,
+  "bbox_format": "xywh (COCO predictions)",
+  "score_threshold_for_precision_recall": 0.5,
+  "runtime_batch_size": 1,
+  "runtime_warmup_images": 10,
+  "runtime_latency_percentiles": [50, 95]
+}

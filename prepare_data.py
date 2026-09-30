@@ -20,9 +20,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / 'data/coco'
-SEED = 42
-CALIBRATION_COUNT = 512
-EVALUATION_COUNT = 1000
+PROTOCOL = json.loads((ROOT / 'protocol.json').read_text(encoding='utf-8'))
+SEED = PROTOCOL['seed']
+CALIBRATION_COUNT = PROTOCOL['calibration_images']
+EVALUATION_COUNT = PROTOCOL['evaluation_images']
 ARCHIVES = {
     'annotations_trainval2017.zip': {
         'url': 'https://s3.amazonaws.com/images.cocodataset.org/annotations/annotations_trainval2017.zip',
@@ -183,8 +184,8 @@ def prepare():
     for name, subset in subsets.items():
         save_json(DATA / 'annotations' / f'{name}.json', subset)
     manifest = {
-        'model': 'official RT-DETR v1 R50-vd COCO pretrained, unchanged',
-        'source_split': 'COCO 2017 val', 'seed': SEED,
+        'model': PROTOCOL['model'],
+        'source_split': PROTOCOL['source_split'], 'seed': SEED,
         'calibration_images': CALIBRATION_COUNT, 'evaluation_images': EVALUATION_COUNT,
         'archive_sha256': {name: spec['sha256'] for name, spec in ARCHIVES.items()},
         'annotation_source_sha256': hashlib.sha256(source_bytes).hexdigest(),
@@ -199,6 +200,9 @@ def prepare():
 
 def verify():
     manifest = json.loads((DATA / 'manifest.json').read_text(encoding='utf-8'))
+    if any(manifest.get(key) != PROTOCOL[key] for key in
+           ('model', 'source_split', 'seed', 'calibration_images', 'evaluation_images')):
+        raise ValueError('COCO subset differs from protocol.json')
     if manifest['archive_sha256'] != {name: spec['sha256'] for name, spec in ARCHIVES.items()}:
         raise ValueError('COCO archive lock differs from the project')
     for name, expected_count in [('calibration', CALIBRATION_COUNT), ('evaluation', EVALUATION_COUNT)]:

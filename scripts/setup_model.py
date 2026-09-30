@@ -1,4 +1,4 @@
-"""Download the pinned official RT-DETR source and COCO checkpoint locally or on Colab."""
+"""Download and verify the shared official RT-DETR source and COCO checkpoint."""
 import json
 import subprocess
 import urllib.request

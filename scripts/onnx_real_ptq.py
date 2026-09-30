@@ -6,7 +6,6 @@ INT4: packed weight-only MatMulNBits for constant-weight MatMul; other ops stay 
 import argparse
 from pathlib import Path
 
-import numpy as np
 import onnx
 import onnxruntime as ort
 import torch
@@ -15,7 +14,8 @@ from onnxruntime.quantization import CalibrationDataReader, CalibrationMethod, Q
 from onnxruntime.quantization import matmul_nbits_quantizer, quant_utils
 
 from coco_protocol import loader, settings, verified_weight, verify_source
-from common import ROOT, dump, path, seed_all, sha256
+from common import ROOT, dump, path, seed_all, sha256, sha256_text
+from model_contract import check_session
 from official import build_coco, load_coco_pretrained
 from onnx_graph import audit_model, model_properties, normalize_gemm, set_model_properties
 
@@ -62,15 +62,15 @@ def export_fp32(output):
     converted = normalize_gemm(output)
     set_model_properties(output, {'ptq_kind': 'onnx_fp32', 'checkpoint_sha256': checkpoint_hash,
                                  'data_manifest_sha256': sha256(path('data/coco/manifest.json')),
-                                 'config_sha256': sha256(ROOT / 'configs/coco_ptq.yaml'),
-                                 'exporter_sha256': sha256(Path(__file__)),
+                                 'config_sha256': sha256_text(ROOT / 'configs/coco_ptq.yaml'),
+                                 'exporter_sha256': sha256_text(Path(__file__)),
                                  'torch_version': torch.__version__,
                                  'torchvision_version': torchvision.__version__})
     check_session(output)
     audit = audit_model(output)
     metadata = {'kind': 'onnx_fp32', 'checkpoint_sha256': checkpoint_hash,
                 'data_manifest_sha256': sha256(path('data/coco/manifest.json')),
-                'config_sha256': sha256(ROOT / 'configs/coco_ptq.yaml'),
+                'config_sha256': sha256_text(ROOT / 'configs/coco_ptq.yaml'),
                 'model_sha256': sha256(output), 'normalized_gemm_nodes': len(converted),
                 'onnx': onnx.__version__, 'onnxruntime': ort.__version__, 'audit': audit}
     dump(sidecar(output), metadata)
@@ -80,20 +80,6 @@ def export_fp32(output):
 
 def sidecar(model_path):
     return Path(str(model_path) + '.manifest.json')
-
-
-def check_session(filename):
-    options = ort.SessionOptions()
-    options.intra_op_num_threads = 4
-    session = ort.InferenceSession(str(filename), sess_options=options, providers=['CPUExecutionProvider'])
-    inputs = {item.name: item for item in session.get_inputs()}
-    if set(inputs) != {'images', 'orig_target_sizes'} or [item.name for item in session.get_outputs()] != ['labels', 'boxes', 'scores']:
-        raise ValueError('Unexpected RT-DETR ONNX input/output interface')
-    labels, boxes, scores = session.run(None, {'images': np.zeros((1, 3, 640, 640), dtype=np.float32),
-                                               'orig_target_sizes': np.array([[640, 640]], dtype=np.int64)})
-    if labels.shape != (1, 300) or boxes.shape != (1, 300, 4) or scores.shape != (1, 300) or not np.isfinite(boxes).all() or not np.isfinite(scores).all():
-        raise ValueError('RT-DETR ONNX smoke inference produced invalid detections')
-    return session
 
 
 class CocoCalibration(CalibrationDataReader):
@@ -121,9 +107,9 @@ def quantize(source, output, precision):
         raise FileNotFoundError('Export the FP32 ONNX model first')
     origin = model_properties(source)
     if (origin.get('ptq_kind') != 'onnx_fp32' or origin.get('checkpoint_sha256') != checkpoint_hash
-            or origin.get('exporter_sha256') != sha256(Path(__file__))):
+            or origin.get('exporter_sha256') != sha256_text(Path(__file__))):
         raise ValueError('FP32 ONNX model or source checkpoint changed')
-    if origin.get('data_manifest_sha256') != sha256(path('data/coco/manifest.json')) or origin.get('config_sha256') != sha256(ROOT / 'configs/coco_ptq.yaml'):
+    if origin.get('data_manifest_sha256') != sha256(path('data/coco/manifest.json')) or origin.get('config_sha256') != sha256_text(ROOT / 'configs/coco_ptq.yaml'):
         raise ValueError('FP32 ONNX data or protocol differs from current environment')
     output.parent.mkdir(parents=True, exist_ok=True)
     if precision == 'int8':

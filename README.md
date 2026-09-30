@@ -1,33 +1,39 @@
-# COCO RT-DETR 실제 INT8·INT4 PTQ 실험
+# RT-DETR COCO 공통 실험 환경
 
-공식 COCO 사전학습 **RT-DETR v1 R50-vd**를 그대로 사용합니다. COCO val2017의 고정된 calibration 512장과 평가 1,000장으로 FP32, 실제 INT8, 실제 INT4 ONNX 모델의 정확도·파일 크기·코랩 CPU 추론시간·메모리를 비교합니다. BDD100K 재학습은 이 실험에 포함되지 않습니다.
+팀원은 **로컬 PC에서 양자화**하고, 완성한 ONNX 모델 **한 개**를 **Colab에서 평가**합니다. 평가 조건은 공식 COCO 사전학습 RT-DETR v1 R50-vd, 입력 640×640, COCO val2017 고정 부분집합 1,000장, ONNX Runtime CPU입니다. 양자화 방법 자체는 팀원이 선택합니다.
 
-## 가장 간단한 실행
+## 1. 로컬: 양자화 모델 만들기
 
-1. [Colab 노트북 열기](https://colab.research.google.com/github/foxyaef/haiteam4_finetune/blob/main/colab/RTDETR_COCO_Eval.ipynb)
-2. 셀을 순서대로 실행합니다. 저장소·공식 가중치·COCO 데이터가 내려받아지고, `rtdetr_fp32.onnx`, `rtdetr_int8.onnx`, `rtdetr_int4.onnx`가 만들어집니다.
-3. 같은 코랩 CPU 환경에서 세 모델을 평가하고 결과 ZIP을 다운로드합니다.
-4. 로컬에서 `python scripts/analyze_real_ptq.py <다운로드한 ZIP>`을 실행해 `summary.csv`, `analysis.md`를 확인합니다.
+Windows PowerShell 예시입니다. Python 3.11을 설치한 뒤 실행하세요. GPU를 사용할 경우 아래 PyTorch 설치 줄 대신 [공식 설치 페이지](https://pytorch.org/get-started/locally/)에서 자신의 장치에 맞는 명령을 골라 **가상환경 안에서** 실행하세요.
 
-자세한 명령과 결과 해석은 [실행 안내](docs/COLAB_WORKFLOW.md)에 있습니다. ONNX 파일에는 모델·데이터 식별 정보가 들어 있어, 나중에는 **양자화된 `.onnx` 파일 하나만** 코랩에 올려 다시 평가할 수 있습니다.
+```powershell
+git clone https://github.com/foxyaef/haiteam4_finetune.git
+cd haiteam4_finetune
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install torch torchvision
+python -m pip install -r requirements.txt -r requirements-onnx.txt
+python scripts/colab_setup.py
+python prepare_data.py
+python scripts/onnx_real_ptq.py export --output artifacts/rtdetr_fp32.onnx
+```
 
-## 무엇을 양자화하나
+`prepare_data.py`는 겹치지 않는 **calibration 512장**과 **평가 1,000장**을 고정합니다. 로컬 PTQ는 calibration 512장을 사용하세요. 예제 INT8/INT4 변환은 [로컬 양자화 안내](docs/LOCAL_QUANTIZATION.md)에 있습니다. 각자 만든 모델은 입력·출력 형식이 [공통 인터페이스](docs/COLAB_WORKFLOW.md#모델-제출-조건)와 같아야 합니다.
 
-| 모델 | 방법 | 실제 저비트 범위 | 남는 FP32 범위 |
-|---|---|---|---|
-| INT8 | COCO calibration을 이용한 정적 QDQ PTQ | 지원되는 Conv·MatMul의 가중치와 활성값 | 지원되지 않거나 양자화되지 않은 연산 |
-| INT4 | 블록별 packed weight-only PTQ | **상수 가중치 MatMul**의 가중치 | Conv, 활성값, 그 밖의 연산 |
+## 2. Colab: 동일 조건에서 평가
 
-INT4는 **전체 RT-DETR W4A4가 아닙니다.** ONNX Runtime이 지원하는 실제 4비트 정수 가중치와 `MatMulNBits` 연산을 사용합니다. 각 결과에는 변환된 연산 수와 ONNX Runtime이 최적화한 정수 연산 수가 기록됩니다. 지원되지 않은 연산을 4비트로 양자화했다고 주장하지 않습니다. INT8과 INT4는 적용 범위가 다르므로, 어느 쪽이 “4비트라서 더 빠르다/정확하다”처럼 직접 해석하지 마세요.
+[공통 평가 노트북 열기](https://colab.research.google.com/github/foxyaef/haiteam4_finetune/blob/main/colab/RTDETR_COCO_Eval.ipynb) → 셀을 위에서 아래로 실행 → 로컬 ONNX 파일 하나 업로드 → 결과 ZIP 다운로드. 노트북은 **양자화를 실행하지 않습니다.** 같은 세션에서 FP32 기준 모델과 업로드 모델을 평가합니다.
 
-주 지표는 **mAP50:95와 FP32 대비 ΔAP point**입니다. AP50·AP75·클래스별 AP, ONNX 파일 크기, 추론시간 mean/p50/p95, 처리 FPS, 프로세스 최대 RSS도 저장합니다. 모든 시간·메모리는 ONNX Runtime **CPU** 실행 기준이며 GPU 메모리와 속도는 이 경로에서 측정하지 않습니다. 코랩 CPU의 하드웨어 배정이 달라질 수 있으므로 속도는 같은 세션의 FP32와 양자화 모델끼리 비교하세요.
+결과에는 mAP50:95, AP50, AP75, 클래스별 AP, FP32 대비 ΔAP, ONNX 파일 크기, 추론시간 mean/p50/p95, 관측 FPS, 최대 프로세스 RSS, 런타임 연산 수가 포함됩니다. 시간과 메모리는 **Colab CPU** 기준이며 세션이 다르면 CPU가 달라질 수 있습니다.
 
-## 프로젝트 파일
+## 3. 로컬: 결과 비교
 
-- [`colab/RTDETR_COCO_Eval.ipynb`](colab/RTDETR_COCO_Eval.ipynb): 설치·모델 생성·평가·결과 다운로드
-- [`scripts/onnx_real_ptq.py`](scripts/onnx_real_ptq.py): FP32 ONNX export, INT8 정적 PTQ, packed INT4 PTQ
-- [`scripts/onnx_eval.py`](scripts/onnx_eval.py): 실제 ONNX 모델의 COCO 정확도·시간·메모리 평가
-- [`scripts/analyze_real_ptq.py`](scripts/analyze_real_ptq.py): 다운로드한 결과 ZIP의 로컬 비교
-- [`prepare_data.py`](prepare_data.py): COCO val2017 다운로드와 512/1,000장 분리
+```powershell
+python scripts/analyze_real_ptq.py .\coco_eval_results_YYYYMMDD_HHMMSS.zip
+```
 
-이전 fake quantization·BDD100K 파일은 저장소에서 정리했습니다. 데이터·가중치·생성 모델은 Git에 포함되지 않으며 [COCO 이용 조건](https://cocodataset.org/#termsofuse)을 확인하세요.
+`runs/real_ptq_analysis/summary.csv`와 `analysis.md`가 생성됩니다. ΔAP point = (FP32 mAP50:95 − 제출 모델 mAP50:95) × 100입니다.
+
+**제출 모델의 이름이 INT4라도 전체 RT-DETR이 4비트라는 뜻은 아닙니다.** 예제 INT4는 상수 가중치 MatMul만 실제 4비트이고 Conv·활성값은 FP32입니다. 자체 제작 모델은 출처와 방법을 팀이 선언한 것으로 표시합니다. 그래프 연산 수와 생성 기록을 함께 확인해야 실제 양자화 범위를 주장할 수 있습니다.
+
+자세한 실행·업로드·결과 해석은 [Colab 평가 안내](docs/COLAB_WORKFLOW.md), [데이터 구성](docs/COCO_DATA.md)을 참고하세요. 데이터·가중치·모델 파일은 GitHub에 포함하지 않습니다.

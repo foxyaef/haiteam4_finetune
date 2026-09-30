@@ -21,6 +21,11 @@ def sha256(filename):
     return digest.hexdigest()
 
 
+def sha256_text(filename):
+    """Hash code/config identically across LF and CRLF Git checkouts."""
+    return hashlib.sha256(Path(filename).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
+
+
 def dump(filename, value):
     filename = Path(filename)
     filename.parent.mkdir(parents=True, exist_ok=True)

@@ -1,4 +1,4 @@
-"""Compare a real-PTQ Colab result ZIP with its FP32 ONNX baseline; stdlib only."""
+"""Compare shared COCO evaluation results with their FP32 ONNX baseline; stdlib only."""
 import argparse
 import csv
 import io
@@ -56,7 +56,10 @@ def analyze(inputs, output):
         same_source = (item is base or v['model_properties'].get('fp32_model_sha256') == base['provenance']['model_sha256'])
         runtime_p50 = p['timing_ms_per_image']['runtime_ms']['p50']
         size = p['onnx_model_bytes']
-        rows.append({'run_id': v['run_id'], 'kind': v['kind'], 'same_fp32_onnx_source': same_source,
+        rows.append({'run_id': v['run_id'], 'kind': v['kind'],
+                     'method': v.get('method_label', v['kind']),
+                     'identity_status': v.get('identity_status', 'project_generated'),
+                     'same_fp32_onnx_source': same_source,
                      'mAP50_95': m['mAP50_95'], 'delta_ap_points': round(100 * (base_ap - m['mAP50_95']), 4),
                      'AP50': m['mAP50'], 'AP75': m['mAP75'],
                      'model_mib': round(size / 2**20, 3), 'size_ratio_to_fp32': round(size / base_size, 4),
@@ -68,25 +71,27 @@ def analyze(inputs, output):
                      'runtime_integer_nodes': sum(v['optimized_runtime_op_counts'].get(k, 0) for k in
                                                   ('QLinearConv', 'QLinearMatMul', 'MatMulInteger', 'ConvInteger',
                                                    'QGemm', 'MatMulIntegerToFloat', 'DynamicQuantizeMatMul')),
-                     'int4_matmul_nodes': audit['matmul_nbits_nodes'],
-                     'int4_weight_elements': audit['int4_weight_elements']})
+                     'int4_matmul_nodes': audit.get('matmul_nbits_nodes', 0),
+                     'int4_weight_elements': audit.get('int4_weight_elements', 0)})
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     with (output / 'summary.csv').open('w', encoding='utf-8-sig', newline='') as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
-    lines = ['# 실제 PTQ COCO 평가', '',
-             '모든 결과는 동일한 FP32 ONNX 모델, COCO val2017 평가 1,000장, ONNX Runtime CPU 실행을 기준으로 비교합니다.',
+    lines = ['# RT-DETR COCO 공통 평가', '',
+             'COCO val2017 평가 1,000장과 ONNX Runtime CPU 실행을 기준으로 비교합니다.',
              'ΔAP point = (FP32 AP − 실험 AP) × 100. 양수는 정확도 손실입니다.',
-             'INT8은 정적 QDQ로 Conv/MatMul을 양자화합니다. INT4는 상수 가중치 MatMul의 packed weight-only이며 Conv·활성값은 FP32입니다.',
-             '따라서 INT8과 INT4는 양자화 범위가 다릅니다. 아래 수치를 전체 모델 W4A4 효과로 해석하지 마세요.', '',
-             '| 모델 | mAP50:95 | ΔAP point | 크기 MiB | FP32 대비 크기 | 런타임 p50 ms | FPS | peak RSS MiB | INT4 MatMul 수 |',
+             '팀이 등록한 모델의 양자화 기법·원본 모델 정보는 자기 신고입니다. 그래프 연산 수와 원본 파일을 별도로 확인하세요.', '',
+             '| 모델·방법 | mAP50:95 | ΔAP point | 크기 MiB | FP32 대비 크기 | 런타임 p50 ms | FPS | peak RSS MiB | INT4 MatMul 수 |',
              '|---|---:|---:|---:|---:|---:|---:|---:|---:|']
     for row in rows:
-        lines.append(f'| {row["kind"]} | {row["mAP50_95"]:.4f} | {row["delta_ap_points"]:.2f} | {row["model_mib"]:.1f} | {row["size_ratio_to_fp32"]:.2f}× | {row["runtime_p50_ms"]:.1f} | {row["observed_fps"]:.1f} | {row["peak_rss_mib"]:.1f} | {row["int4_matmul_nodes"]} |')
+        label = row['method'].replace('|', '/')
+        lines.append(f'| {label} | {row["mAP50_95"]:.4f} | {row["delta_ap_points"]:.2f} | {row["model_mib"]:.1f} | {row["size_ratio_to_fp32"]:.2f}× | {row["runtime_p50_ms"]:.1f} | {row["observed_fps"]:.1f} | {row["peak_rss_mib"]:.1f} | {row["int4_matmul_nodes"]} |')
     if any(not row['same_fp32_onnx_source'] for row in rows):
         lines.extend(['', '주의: 업로드 모델의 원본 FP32 ONNX 해시가 이번 기준 파일과 다릅니다. 공식 체크포인트·평가 설정·export 코드가 같아 비교를 허용했지만, 엄밀한 동일 그래프 비교는 같은 FP32 ONNX에서 다시 양자화해야 합니다.'])
+    if any(row['identity_status'] == 'team_declared' for row in rows):
+        lines.extend(['', '주의: 팀 등록 모델의 원본·양자화 방법은 등록자가 선언한 정보이며 평가기가 증명하지 않습니다. 발표 전에 모델 생성 기록과 그래프 적용 범위를 확인하세요.'])
     if not same_cpu:
         lines.extend(['', '주의: 결과의 CPU 모델이 서로 달라 속도·메모리 수치를 직접 비교하기 어렵습니다. 정확도 지표는 같은 평가 데이터 기준으로 볼 수 있습니다.'])
     (output / 'analysis.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')

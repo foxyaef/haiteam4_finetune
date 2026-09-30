@@ -12,6 +12,22 @@ import prepare_data
 
 
 class CocoPreparationTests(unittest.TestCase):
+    def test_rewrites_legacy_newlines_and_annotation_hashes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            annotation = root / 'calibration.json'
+            annotation.write_bytes(b'{\r\n  "images": []\r\n}')
+            prepare_data.save_json(annotation, {'images': []})
+            self.assertNotIn(b'\r\n', annotation.read_bytes())
+            manifest = root / 'manifest.json'
+            old = {'subsets': {'calibration': {'annotation_sha256': 'old'},
+                               'evaluation': {'annotation_sha256': 'old'}}}
+            manifest.write_text(json.dumps(old), encoding='utf-8')
+            new = {'subsets': {'calibration': {'annotation_sha256': 'new'},
+                               'evaluation': {'annotation_sha256': 'new'}}}
+            prepare_data.save_json(manifest, new, migrate_annotation_hashes=True)
+            self.assertEqual(json.loads(manifest.read_text(encoding='utf-8')), new)
+
     def test_complete_partial_archive_is_verified_without_network(self):
         with tempfile.TemporaryDirectory() as directory:
             data_root = Path(directory)
@@ -60,6 +76,8 @@ class CocoPreparationTests(unittest.TestCase):
                 prepare_data.verify()
                 prepare_data.prepare()  # Rerunning preserves the same outputs.
                 self.assertEqual(len(list((data_root / 'val2017').glob('*.jpg'))), 1512)
+                self.assertNotIn(b'\r\n', (data_root / 'manifest.json').read_bytes())
+                self.assertNotIn(b'\r\n', (data_root / 'annotations/calibration.json').read_bytes())
 
 
 if __name__ == '__main__':

@@ -11,15 +11,20 @@ from analyze_real_ptq import analyze
 
 
 class RealPtqAnalysisTests(unittest.TestCase):
-    def bundle(self, filename, different_source=False, different_exporter=False):
+    def bundle(self, filename, different_source=False, different_exporter=False, external=False):
         with zipfile.ZipFile(filename, 'w') as bundle:
-            for kind, ap, size in [('onnx_fp32', .4, 100), ('onnx_int8', .39, 60), ('onnx_int4', .38, 80)]:
+            models = [('onnx_fp32', .4, 100), ('onnx_int8', .39, 60), ('onnx_int4', .38, 80)]
+            if external:
+                models.append(('onnx_experiment', .37, 90))
+            for kind, ap, size in models:
                 source_hash = 'bad' if kind == 'onnx_int4' and different_source else 'fp32hash'
                 props = {'exporter_sha256': 'other' if kind == 'onnx_int4' and different_exporter else 'exporter'}
                 if kind != 'onnx_fp32':
                     props['fp32_model_sha256'] = source_hash
                 provenance = {'kind': kind, 'run_id': kind, 'model_sha256': 'fp32hash' if kind == 'onnx_fp32' else kind,
                               'model_properties': props,
+                              'method_label': 'team_method' if kind == 'onnx_experiment' else kind,
+                              'identity_status': 'team_declared' if kind == 'onnx_experiment' else 'project_generated',
                               'checkpoint_sha256': 'weight', 'data_manifest_sha256': 'data',
                               'config_sha256': 'config', 'evaluator_sha256': 'code',
                               'onnxruntime': '1.22.1', 'providers': ['CPUExecutionProvider'],
@@ -55,6 +60,15 @@ class RealPtqAnalysisTests(unittest.TestCase):
             self.bundle(source, different_exporter=True)
             with self.assertRaisesRegex(ValueError, 'exporter'):
                 analyze([source], Path(directory) / 'report')
+
+    def test_team_model_is_labeled_as_declared(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / 'results.zip'
+            self.bundle(source, external=True)
+            analyze([source], Path(directory) / 'report')
+            report = (Path(directory) / 'report/analysis.md').read_text(encoding='utf-8')
+            self.assertIn('team_method', report)
+            self.assertIn('등록자가 선언한 정보', report)
 
 
 if __name__ == '__main__':

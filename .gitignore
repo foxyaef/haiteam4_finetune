@@ -9,6 +9,8 @@ vendor/
 *.pt
 *.onnx
 artifacts/
+uploads/
 .devdeps/
 real_ptq_results_*.zip
+coco_eval_results_*.zip
 *.onnx.manifest.json

@@ -19,7 +19,7 @@ import torch
 from tqdm import tqdm
 
 from coco_protocol import COCO_CATEGORY_IDS, loader, settings, verified_weight, verify_source
-from common import ROOT, dump, path, sha256
+from common import ROOT, dump, path, sha256, sha256_text
 from metrics import evaluate_predictions
 from onnx_graph import audit_model, model_properties
 
@@ -104,11 +104,11 @@ def evaluate(model_path, run_id, warmup):
     model_path = Path(model_path).resolve()
     properties = model_properties(model_path)
     kind = properties.get('ptq_kind')
-    if kind not in {'onnx_fp32', 'onnx_int8', 'onnx_int4'}:
-        raise ValueError('Use an ONNX model from onnx_real_ptq.py')
+    if kind not in {'onnx_fp32', 'onnx_int8', 'onnx_int4', 'onnx_experiment'}:
+        raise ValueError('Register a team ONNX model with scripts/register_model.py before evaluation')
     expected = {'checkpoint_sha256': checkpoint_hash,
                 'data_manifest_sha256': sha256(path('data/coco/manifest.json')),
-                'config_sha256': sha256(ROOT / 'configs/coco_ptq.yaml')}
+                'config_sha256': sha256_text(ROOT / 'configs/coco_ptq.yaml')}
     if any(properties.get(key) != value for key, value in expected.items()):
         raise ValueError('Uploaded model does not match this COCO checkpoint/data/protocol')
     output = ROOT / 'runs/onnx_eval' / run_id
@@ -164,14 +164,18 @@ def evaluate(model_path, run_id, warmup):
             writer.writerows(metrics['class_wise'])
         dump(output / 'profile.json', profile)
         dump(output / 'provenance.json', {'run_id': run_id, 'kind': kind,
+             'method_label': properties.get('method_label', properties.get('ptq_method', kind)),
+             'identity_status': properties.get('identity_status', 'project_generated'),
              'model_sha256': sha256(model_path), 'model_properties': properties,
              'checkpoint_sha256': checkpoint_hash, 'data_manifest_sha256': expected['data_manifest_sha256'],
-             'config_sha256': expected['config_sha256'], 'evaluator_sha256': sha256(Path(__file__)),
+             'config_sha256': expected['config_sha256'], 'evaluator_sha256': sha256_text(Path(__file__)),
              'onnxruntime': ort.__version__, 'onnx': onnx.__version__, 'python': platform.python_version(),
              'platform': platform.platform(), 'cpu': cpu_model(), 'logical_cpu_count': psutil.cpu_count(),
              'providers': session.get_providers(), 'optimized_runtime_op_counts': optimized_ops,
              'artifact_audit': audit_model(model_path),
-             'interpretation': 'INT8: static QDQ with CPU integer kernels; INT4: packed weight-only MatMulNBits, remaining operators FP32'})
+             'interpretation': ('INT8: static QDQ Conv/MatMul; INT4: packed weight-only MatMulNBits. '
+                                'For onnx_experiment, precision and source are team-declared; '
+                                'inspect artifact and optimized operation counts.')})
         print(f'{run_id}: AP={metrics["mAP50_95"]:.4f}; p50={profile["timing_ms_per_image"]["total_ms"]["p50"]:.1f} ms; model={model_path.stat().st_size / 2**20:.1f} MiB')
     except BaseException:
         if not any(output.iterdir()):

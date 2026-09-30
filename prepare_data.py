@@ -45,15 +45,23 @@ def sha256(path):
     return digest.hexdigest()
 
 
-def save_json(path, value):
+def save_json(path, value, migrate_annotation_hashes=False):
     path.parent.mkdir(parents=True, exist_ok=True)
+    canonical = json.dumps(value, ensure_ascii=False, indent=2).encode('utf-8')
     if path.exists():
         existing = json.loads(path.read_text(encoding='utf-8'))
         if existing != value:
-            raise ValueError(f'Existing file has different contents: {path}')
-        return
+            if not migrate_annotation_hashes:
+                raise ValueError(f'Existing file has different contents: {path}')
+            adjusted = json.loads(json.dumps(existing))
+            for name in ('calibration', 'evaluation'):
+                adjusted['subsets'][name]['annotation_sha256'] = value['subsets'][name]['annotation_sha256']
+            if adjusted != value:
+                raise ValueError(f'Existing file has different contents: {path}')
+        if path.read_bytes() == canonical:
+            return
     temporary = path.with_suffix(path.suffix + '.tmp')
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding='utf-8')
+    temporary.write_bytes(canonical)
     temporary.replace(path)
 
 
@@ -185,7 +193,7 @@ def prepare():
             'annotation_sha256': sha256(DATA / 'annotations' / f'{name}.json'),
         } for name, subset in subsets.items()},
     }
-    save_json(DATA / 'manifest.json', manifest)
+    save_json(DATA / 'manifest.json', manifest, migrate_annotation_hashes=True)
     verify()
 
 

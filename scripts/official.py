@@ -9,7 +9,7 @@ import types
 import torch
 from common import ROOT
 
-def build():
+def _config(num_classes, remap):
     base = ROOT / 'vendor/RT-DETR/rtdetr_pytorch'
     for name in ['src', 'src.nn', 'src.nn.backbone', 'src.zoo', 'src.zoo.rtdetr', 'src.misc']:
         if name not in sys.modules:
@@ -24,10 +24,28 @@ def build():
     from src.zoo.rtdetr.rtdetr_criterion import SetCriterion
     from src.zoo.rtdetr.matcher import HungarianMatcher
     from src.core import YAMLConfig
-    cfg = YAMLConfig(str(base / 'configs/rtdetr/include/rtdetr_r50vd.yml'),
-                     num_classes=10, remap_mscoco_category=False,
+    return YAMLConfig(str(base / 'configs/rtdetr/include/rtdetr_r50vd.yml'),
+                     num_classes=num_classes, remap_mscoco_category=remap,
                      RTDETR={'multi_scale': None}, PResNet={'pretrained': False})
+
+
+def build():
+    cfg = _config(10, False)
     return cfg.model.float(), cfg.criterion, cfg.postprocessor
+
+
+def build_coco():
+    """Build the unchanged 80-class COCO model, without BDD head replacement."""
+    cfg = _config(80, False)
+    return cfg.model.float(), cfg.postprocessor
+
+
+def load_coco_pretrained(model, filename):
+    """Strictly load every tensor, including the original 80-class heads."""
+    state = torch.load(filename, map_location='cpu', weights_only=True)
+    weights = state['ema']['module'] if 'ema' in state else state.get('model', state)
+    model.load_state_dict(weights, strict=True)
+    return {'loaded_tensors': len(weights), 'reinitialized': []}
 
 def load_initial(model, filename):
     # Only this known official download is allowed as an initial checkpoint.

@@ -1,6 +1,6 @@
 # 이 프로젝트의 RT-DETR 내부 구조
 
-이 저장소는 **RT-DETR v1 R50-vd**를 사용한다. 기본 입력은 RGB 640×640이며 COCO 사전학습 가중치를 BDD100K 10개 탐지 클래스로 미세조정한다. R18이나 RT-DETRv2의 세부 설정을 이 모델에 적용하면 다른 실험이 된다. 정확한 버전·가중치 출처는 [`upstream-lock.json`](../upstream-lock.json)에 고정돼 있다.
+이번 실험은 **RT-DETR v1 R50-vd의 COCO 사전학습 가중치를 수정 없이 사용**한다. 기본 입력은 RGB 640×640, 분류 출력은 COCO 80개 클래스다. BDD100K 파인튜닝이나 Head 재초기화는 하지 않는다. R18이나 RT-DETRv2의 세부 설정을 이 모델에 적용하면 다른 실험이 된다. 정확한 버전·가중치 출처는 [`upstream-lock.json`](../upstream-lock.json)에 고정돼 있다.
 
 ```text
 RGB 이미지 [B,3,640,640]
@@ -54,7 +54,7 @@ Encoder의 특징마다 분류 점수와 박스 후보를 만들고, 상위 후�
 
 ## 6 이번 양자화 실험에서 실제로 바뀌는 부분
 
-1차 Basic PTQ는 실행 중 호출되는 `torch.nn.Conv2d`와 `torch.nn.Linear`에 한정한다. 가중치에는 **출력 채널별 대칭 MinMax**, 입력 활성값에는 **텐서별 비대칭 MinMax**를 적용한다. 512장 train calibration의 FP32 입력 분포를 관측한 뒤 scale을 고정한다. 각 담당자는 자기 영역만 W8A8·W6A6·W4A4로 바꾸고 나머지는 FP32로 둔다.
+1차 Basic PTQ는 실행 중 호출되는 `torch.nn.Conv2d`와 `torch.nn.Linear`에 한정한다. 가중치에는 **출력 채널별 대칭 MinMax**, 입력 활성값에는 **텐서별 비대칭 MinMax**를 적용한다. 평가 1,000장과 겹치지 않는 **COCO val 512장**의 FP32 입력 분포를 관측한 뒤 scale을 고정한다. 각 담당자는 자기 영역만 W8A8·W6A6·W4A4로 바꾸고 나머지는 FP32로 둔다.
 
 PyTorch `MultiheadAttention` 안의 `in_proj_weight`처럼 `Linear.forward` 호출을 거치지 않는 가중치와 functional attention MatMul, BatchNorm·LayerNorm, softmax, deformable sampling, bias·누산기는 이 단계의 양자화 대상이 아니다. 실행 결과의 `provenance.json`에 실제 호출·양자화된 모듈 수와 실행되지 않은 모듈 목록을 남긴다. **W4A4는 지정한 Conv/Linear 입력·가중치의 표현 정밀도**를 뜻한다. 현재 코드는 fake quantization으로 정확도를 검사하며 실제 INT4 저장·연산·라즈베리파이 속도를 평가하지 않는다.
 

@@ -2,7 +2,6 @@
 import numpy as np
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
-from common import CLASSES
 
 def valid_mean(values):
     valid = values[values >= 0]
@@ -22,7 +21,8 @@ def evaluate_predictions(annotation_file, predictions, threshold=0.5):
     ev.accumulate()
     ev.summarize()
     # COCO's score-ordered one-to-one matching, IoU=.50, all areas, maxDets=100.
-    totals = {i: [0, 0, 0] for i in range(1, 11)}  # TP FP eligible GT
+    categories = {item['id']: item['name'] for item in gt.dataset['categories']}
+    totals = {i: [0, 0, 0] for i in categories}  # TP FP eligible GT
     for item in ev.evalImgs:
         if item is None or list(item['aRng']) != list(ev.params.areaRng[0]):
             continue
@@ -36,7 +36,7 @@ def evaluate_predictions(annotation_file, predictions, threshold=0.5):
     rows = []
     for index, cid in enumerate(ev.params.catIds):
         tp, fp, total = totals[cid]
-        rows.append(dict(id=int(cid), name=CLASSES[cid-1],
+        rows.append(dict(id=int(cid), name=categories[cid],
             AP=valid_mean(ev.eval['precision'][:, :, index, 0, 2]),
             AP50=valid_mean(ev.eval['precision'][0, :, index, 0, 2]),
             AR100=valid_mean(ev.eval['recall'][:, index, 0, 2]),

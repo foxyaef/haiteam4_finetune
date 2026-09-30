@@ -1,0 +1,18 @@
+# COCO-pretrained RT-DETR R50 is evaluated directly; no BDD fine-tuning.
+seed: 42
+image_size: 640
+calibration_size: 512
+evaluation_size: 1000
+weight_bits: [8, 6, 4]
+activation_bits: [8, 6, 4]
+weight_scheme: symmetric_per_output_channel_minmax
+activation_scheme: asymmetric_per_tensor_minmax
+quantizable_modules: [Conv2d, Linear]
+calibration_images: data/coco/val2017
+calibration_annotations: data/coco/annotations/calibration.json
+evaluation_images: data/coco/val2017
+evaluation_annotations: data/coco/annotations/evaluation.json
+checkpoint: weights/rtdetr_r50vd_6x_coco_from_paddle.pth
+run_dir: runs/coco_phase1
+postprocess_top_queries: 300
+coco_max_dets: 100

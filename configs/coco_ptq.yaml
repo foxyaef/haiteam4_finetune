@@ -1,0 +1,10 @@
+# Fixed COCO subset and official RT-DETR checkpoint for actual ONNX PTQ.
+seed: 42
+image_size: 640
+calibration_size: 512
+evaluation_size: 1000
+calibration_images: data/coco/val2017
+calibration_annotations: data/coco/annotations/calibration.json
+evaluation_images: data/coco/val2017
+evaluation_annotations: data/coco/annotations/evaluation.json
+checkpoint: weights/rtdetr_r50vd_6x_coco_from_paddle.pth

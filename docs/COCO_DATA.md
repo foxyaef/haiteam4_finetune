@@ -2,9 +2,9 @@
 
 `prepare_data.py`는 이번 COCO 사전학습 모델 실험에 필요한 **데이터 다운로드·검증·폴더 구성·부분집합 고정**을 한 번에 수행합니다.
 
-```powershell
-.\.venv\Scripts\python.exe .\prepare_data.py
-.\.venv\Scripts\python.exe .\prepare_data.py --verify-only
+```text
+python prepare_data.py
+python prepare_data.py --verify-only
 ```
 
 첫 명령은 COCO 공식 S3에 있는 `annotations_trainval2017.zip`과 `val2017.zip`을 내려받습니다. 공개된 아카이브의 [크기와 SHA256](https://huggingface.co/datasets/pcuenq/coco-2017-mirror/commit/5200d2cffae8121713bec767b4693bdafc0eeb0b)을 코드에 고정했고, 내려받은 파일을 검사합니다. HTTPS 인증 검사를 끄지 않습니다. 다운로드가 끊기면 `.part` 파일에서 이어받습니다. ZIP 안의 `annotations/instances_val2017.json`을 읽고, seed 42로 val 5,000장 중 **calibration 512장**과 **평가 1,000장**을 겹치지 않게 고릅니다. 전체 5,000장을 풀지 않고 선택한 JPEG 1,512장만 `data/coco/val2017/`에 추출하며 ZIP CRC를 검사합니다.

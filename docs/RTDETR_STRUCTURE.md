@@ -40,22 +40,22 @@ PResNet은 영상에서 위치와 의미 정보를 추출한다. 앞단의 공�
 
 Encoder의 특징마다 분류 점수와 박스 후보를 만들고, 상위 후보를 초기 query로 고른다. query의 초기 품질은 이후 Decoder가 물체를 찾는 난이도에 영향을 준다. 공식 R50 설정에서는 **300개 query**와 **6개 Decoder 층**을 사용한다.
 
-각 Decoder 층은 query 간 self-attention, 세 스케일 특징을 참조하는 deformable cross-attention, FFN 및 정규화로 구성된다. Cross-attention은 모든 영상 위치를 균등하게 보는 대신 기준점 주변의 몇 위치를 샘플링한다. `sampling_offsets`, `attention_weights`, `value_proj`, `output_proj` 같은 Linear 층이 있으나, 좌표 계산·softmax·샘플링 자체는 별도 연산이다. 따라서 Linear만 양자화하는 1차 실험에서는 Decoder 전체 연산이 저비트가 되는 것은 아니다. [고정 버전 Decoder 구현](https://github.com/lyuwenyu/RT-DETR/blob/29320b6fd828f8e0987a71426cf2d961b09dfed7/rtdetr_pytorch/src/zoo/rtdetr/rtdetr_decoder.py)
+각 Decoder 층은 query 간 self-attention, 세 스케일 특징을 참조하는 deformable cross-attention, FFN 및 정규화로 구성된다. Cross-attention은 모든 영상 위치를 균등하게 보는 대신 기준점 주변의 몇 위치를 샘플링한다. `sampling_offsets`, `attention_weights`, `value_proj`, `output_proj` 같은 Linear 층이 있으나, 좌표 계산·softmax·샘플링 자체는 별도 연산이다. [고정 버전 Decoder 구현](https://github.com/lyuwenyu/RT-DETR/blob/29320b6fd828f8e0987a71426cf2d961b09dfed7/rtdetr_pytorch/src/zoo/rtdetr/rtdetr_decoder.py)
 
 ## 4 분류와 박스 Head
 
 이 구현에서 Head는 독립적인 최상위 `head` 객체가 아니다. `decoder.enc_score_head`, `decoder.enc_bbox_head`, `decoder.dec_score_head`, `decoder.dec_bbox_head`에 분류·박스 예측 층이 들어 있다. 학습에서는 Decoder 중간 층의 보조 예측과 denoising query도 사용한다. 추론에서는 마지막 출력이 핵심이며 학습 전용 경로는 실행되지 않을 수 있다.
 
-팀의 구성요소 민감도 표에서는 예측용 네 접두사를 **Head**에 배정하고, Decoder의 나머지를 **Decoder**에 배정한다. 이 규칙은 [`scripts/official.py`](../scripts/official.py)의 `component()`와 같다. 경계에 있는 query 선택 부분의 분류·박스 층은 Head로, query 생성·갱신의 다른 대상 층은 Decoder로 구분한다. 동일 층을 두 그룹에 중복 배정하지 않는다.
+실제 양자화 대상은 PyTorch 모듈 이름이 아니라 **ONNX export 후 그래프의 연산자와 상수 가중치 여부**로 결정된다. 따라서 Head라고 해서 모든 층이 같은 정밀도로 바뀌지는 않는다.
 
 ## 5 학습과 추론의 차이
 
 학습은 Hungarian matching으로 예측과 정답을 연결하고 분류·박스·GIoU 손실을 사용한다. 보조 출력과 denoising은 학습 수렴을 돕는다. 추론에서는 학습용 matching과 denoising을 수행하지 않는다. RT-DETR은 query 집합에서 최종 탐지를 바로 내므로 일반적인 YOLO식 NMS를 기본 후처리로 사용하지 않는다. 평가에서는 후처리 top 300 예측을 COCO 방식의 `maxDets=100`으로 집계한다. [공식 모델 설명](https://github.com/lyuwenyu/RT-DETR), [프로젝트 평가 구현](../scripts/metrics.py)
 
-## 6 이번 양자화 실험에서 실제로 바뀌는 부분
+## 6 이번 실제 PTQ의 범위
 
-1차 Basic PTQ는 실행 중 호출되는 `torch.nn.Conv2d`와 `torch.nn.Linear`에 한정한다. 가중치에는 **출력 채널별 대칭 MinMax**, 입력 활성값에는 **텐서별 비대칭 MinMax**를 적용한다. 평가 1,000장과 겹치지 않는 **COCO val 512장**의 FP32 입력 분포를 관측한 뒤 scale을 고정한다. 각 담당자는 자기 영역만 W8A8·W6A6·W4A4로 바꾸고 나머지는 FP32로 둔다.
+FP32 모델을 ONNX로 export한 뒤, INT8은 평가 이미지와 겹치지 않는 COCO val 512장으로 calibration한 **Conv·MatMul의 정적 QDQ**를 적용한다. ONNX Runtime CPU 최적화 그래프에 정수 연산이 남는지 확인한다.
 
-PyTorch `MultiheadAttention` 안의 `in_proj_weight`처럼 `Linear.forward` 호출을 거치지 않는 가중치와 functional attention MatMul, BatchNorm·LayerNorm, softmax, deformable sampling, bias·누산기는 이 단계의 양자화 대상이 아니다. 실행 결과의 `provenance.json`에 실제 호출·양자화된 모듈 수와 실행되지 않은 모듈 목록을 남긴다. **W4A4는 지정한 Conv/Linear 입력·가중치의 표현 정밀도**를 뜻한다. 현재 코드는 fake quantization으로 정확도를 검사하며 실제 INT4 저장·연산·라즈베리파이 속도를 평가하지 않는다.
+INT4는 ONNX Runtime의 **상수 가중치 MatMul**에 한해 블록별 4비트 가중치를 패킹한 `MatMulNBits`를 적용한다. Conv와 활성값은 FP32에 남는다. 따라서 모델 전체 W4A4라고 부르지 않는다. 실제 변환된 연산 수와 파일 크기·메모리·지연시간을 함께 보고한다. [ONNX Runtime 양자화 지원 범위](https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html#quantize-to-int4uint4)
 
-특히 출력 점수·박스 Head에서 큰 AP 손실이 보이면 분류 순위, 박스 위치, 클래스별 AP가 어떻게 달라졌는지 살펴본다. Backbone 또는 Encoder가 민감하면 해당 특징을 받는 모든 Head 예측이 함께 흔들릴 수 있으므로 한두 이미지의 탐지 결과로 원인을 단정하지 않는다.
+특히 출력 점수·박스 Head에서 AP 손실이 보이면 분류 순위, 박스 위치, 클래스별 AP가 어떻게 달라졌는지 살펴본다. 한두 이미지의 탐지 결과만으로 원인을 단정하지 않는다.

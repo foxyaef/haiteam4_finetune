@@ -7,4 +7,8 @@ __pycache__/
 vendor/
 *.pth
 *.pt
-
+*.onnx
+artifacts/
+.devdeps/
+real_ptq_results_*.zip
+*.onnx.manifest.json

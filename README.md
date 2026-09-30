@@ -2,7 +2,99 @@
 
 이 프로젝트는 **공식 RT-DETR v1 R50-vd**, **COCO 전용 공식 pretrained weight**, **640×640 FP32**, **BDD100K Detection 공식 train/val**을 사용합니다. RT-DETRv2, R50-m, HGNet 모델이 아닙니다.
 
-현재 연결한 데이터는 Berkeley 공식 서버의 `bdd100k_images_100k.zip` 및 `bdd100k_labels.zip` **원본 Labels 배포본**입니다. 현재 공식 “Detection 2020 Labels” 버튼은 다른 이미지 ZIP으로 잘못 연결되어 있어 사용하지 않았습니다. 이 데이터가 Detection 2020 재라벨링 배포본과 같다고 가정하지 마세요. 비교 실험에서는 이 프로젝트의 원본 ZIP 해시·변환 결과 JSON을 동일하게 공유해야 합니다. 출처와 변환 내역은 `reports/dataset_download_provenance.json`에 기록됩니다.
+원본 작업 환경에서는 Berkeley 공식 서버의 `bdd100k_images_100k.zip` 및 `bdd100k_labels.zip` **원본 Labels 배포본**을 사용했습니다. 새로 GitHub에서 복제한 저장소에는 이미지·라벨·모델 파일이 들어 있지 않습니다. 이 데이터가 Detection 2020 재라벨링 배포본과 같다고 가정하지 마세요. 비교 실험에서는 같은 원본 ZIP 해시와 같은 이미지 목록을 사용해야 합니다. 출처와 변환 내역 예시는 `reports/dataset_download_provenance.json`에 기록돼 있습니다.
+
+## 다섯 명이 함께하는 1차 양자화 실험
+
+자세한 모델 구조는 [RT-DETR 내부 구조](docs/RTDETR_STRUCTURE.md)를 먼저 읽으세요. 이 저장소의 모델은 **RT-DETR v1 R50-vd**입니다. 앞선 R18 연구 초안과 모델이 다르므로 R50 가중치·6개 Decoder 층·300개 query로 통일합니다. 1차 실험은 16조건, 즉 FP32 1개 + 전체 모델 W8A8/W6A6/W4A4 3개 + 네 구성요소 × 세 비트 수 12개입니다.
+
+| 사람 | 담당 | 명령의 `--group` |
+|---|---|---|
+| 1번 | FP32 기준과 전체 양자화 | `baseline`, `all` |
+| 2번 | Backbone만 양자화 | `backbone` |
+| 3번 | Hybrid Encoder만 양자화 | `encoder` |
+| 4번 | Decoder만 양자화 | `decoder` |
+| 5번 | 분류·박스 Head만 양자화 | `head` |
+
+### 처음 설치하는 팀원의 순서
+
+Windows PowerShell 기준입니다. Python 3.12와 Git을 설치한 뒤 아래를 실행합니다. `setup.ps1`은 고정된 공식 RT-DETR 소스와 **COCO pretrained R50 가중치**를 내려받고 SHA256을 확인합니다. GPU 종류에 맞춰 `-Backend xpu`, `-Backend cu128`, `-Backend cpu` 중 하나를 선택합니다. CUDA·XPU 지원과 버전은 장치마다 확인하세요.
+
+```powershell
+git clone https://github.com/foxyaef/haiteam4_finetune.git
+cd haiteam4_finetune
+powershell -ExecutionPolicy Bypass -File .\setup.ps1 -Backend cpu
+.\.venv\Scripts\python.exe .\download_bdd100k.py --root .
+.\run.cmd check
+```
+
+`download_bdd100k.py`는 Berkeley 원본 이미지·라벨 ZIP의 크기·SHA256·CRC를 검사하고 train/val을 추출해 COCO 형식과 **train에서 선택한 calibration 512장**을 만듭니다. 수 GB의 저장 공간과 시간이 필요하며 다운로드가 끊기면 같은 명령으로 이어받을 수 있습니다. 원본 배포와 Detection 2020 배포의 차이를 아래 데이터 준비 절에서 확인하세요. 데이터 이용 조건은 원본 배포 페이지에서 확인합니다.
+
+### 공통 평가 이미지와 checkpoint 고정
+
+아래 명령은 공식 val 10,000장 가운데 seed 42로 1,000장을 **이미지 이름 기준**으로 결정하고 `data/phase1_eval_manifest.json`, `data/annotations/phase1_eval.json`을 만듭니다. 이미 파일이 있으면 덮어쓰지 않고 내용이 같은지 검사합니다. 파일 이름·박스 내용을 경로에 영향을 받지 않는 SHA256으로 비교합니다. Calibration은 train 512장이며 평가 이미지와 겹치지 않는지 검사합니다.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\phase1_data.py build
+.\.venv\Scripts\python.exe scripts\phase1_data.py verify
+```
+
+팀장이 BDD100K fine-tuning을 완료하고 `runs/fp32/best.pth`를 확정한 뒤 다음 명령으로 `configs/phase1_checkpoint.json`을 만듭니다. 이 작은 lock 파일은 Git에 커밋하고, 큰 checkpoint와 `best.pth.sha256.json`은 팀에 별도로 공유합니다. 모든 팀원은 두 파일을 `runs/fp32/`에 두고 같은 checkpoint 해시를 통과해야 합니다. **COCO pretrained weight만으로 이 lock을 만들면 안 됩니다.**
+
+```powershell
+.\run.cmd train
+.\phase1.cmd lock-checkpoint
+```
+
+원래 fine-tuning 코드는 공식 val로 최고 epoch를 선택하므로 이번 val 1,000장은 **개발 평가용**입니다. 이 결과를 독립 test 성능으로 부르지 않습니다. 최종 독립 평가를 원하면 학습 때부터 별도 데이터 분리 정책을 정해야 합니다.
+
+### 담당자별 실행
+
+1번이 FP32와 전체 모델 실험을 먼저 실행합니다.
+
+```powershell
+.\phase1.cmd run --group baseline
+.\phase1.cmd run --group all --bits 8
+.\phase1.cmd run --group all --bits 6
+.\phase1.cmd run --group all --bits 4
+```
+
+다른 담당자는 자기 영역에서 8·6·4비트를 **매번 동일 FP32 checkpoint에서 새로 시작해** 실행합니다. 아래는 Backbone 담당자의 예입니다. Encoder·Decoder·Head 담당자는 `--group`만 바꿉니다.
+
+```powershell
+.\phase1.cmd run --group backbone --bits 8
+.\phase1.cmd run --group backbone --bits 6
+.\phase1.cmd run --group backbone --bits 4
+.\.venv\Scripts\python.exe scripts\phase1_report.py
+```
+
+기본 장치는 `configs/finetune.yaml`의 `device`를 따릅니다. 다른 장치에서는 `--device cpu` 등으로 지정합니다. 실행 결과는 `runs/phase1/<실험 ID>/`에 `metrics.json`, `class_metrics.csv`, `provenance.json`으로 저장됩니다. 예측 전체가 필요할 때만 `--save-predictions`를 사용합니다. 기존 결과 폴더는 덮어쓰지 않습니다. `phase1_report.py`의 `summary.csv`는 빠진 조건을 `missing`으로 표시합니다.
+
+### 이번 양자화의 정확한 범위와 성능지표
+
+`configs/phase1.yaml`을 팀 공통 설정으로 사용합니다. 코드가 **실제로 호출한 Conv2d/Linear**의 가중치와 입력 활성값에만 fake W8A8/W6A6/W4A4 양자화를 적용합니다. 가중치는 출력 채널별 대칭 MinMax, 활성값은 텐서별 비대칭 MinMax입니다. `provenance.json`은 사용된 모듈 수·이름별 calibration 범위와 실행되지 않은 모듈을 기록합니다. Functional attention MatMul, 정규화, softmax, deformable sampling 등은 FP32에 남습니다. 이 단계의 4비트는 정확도 민감도 연구용으로 실제 INT4 배포 속도를 의미하지 않습니다.
+
+| 지표 | 정의 | 사용 방법 |
+|---|---|---|
+| mAP50:95 | COCO bbox AP를 IoU 0.50~0.95에서 평균 | 주 정확도 지표 |
+| ΔmAP | `100 × (FP32 mAP50:95 - 실험 mAP50:95)` | AP point 단위 민감도 |
+| AP50 | IoU 0.50의 AP | 탐지 성능 변화 확인 |
+| AP75 | IoU 0.75의 AP | 더 엄격한 위치 정확도 확인 |
+| Class-wise AP | BDD100K 10개 클래스별 AP50:95 | 손실이 집중된 클래스 확인 |
+
+`metrics.json`의 AP 값은 **0~1**, `summary.csv`의 `delta_ap_points`는 **0~100 AP point**입니다. 평가기는 공통 `scripts/metrics.py`를 쓰며 postprocessor top 300, COCO maxDets 100으로 고정합니다. Pi의 latency·FPS·RSS·파일 크기는 실제 배포 모델을 준비한 후 같은 장치에서 별도 측정합니다.
+
+### 새로 추가한 파일
+
+| 파일 | 역할 |
+|---|---|
+| `docs/RTDETR_STRUCTURE.md` | R50 내부 흐름과 네 구성요소 경계 설명 |
+| `configs/phase1.yaml` | 공통 비트·이미지 수·양자화 규칙 |
+| `scripts/phase1_data.py` | 고정 평가 이미지·어노테이션 생성과 검증 |
+| `scripts/phase1_quant.py` | Conv/Linear Basic fake PTQ |
+| `scripts/phase1_run.py` | checkpoint lock, FP32·담당 영역 실행, 지표 저장 |
+| `scripts/phase1_report.py` | 16조건 결과 취합 |
+| `phase1.cmd` | Windows 실행 진입점 |
 
 ## 바로 시작하기
 
@@ -13,7 +105,7 @@ PowerShell에서 이 폴더를 연 다음 실행합니다. 가상환경을 활�
 .\run.cmd smoke
 ```
 
-현재 BDD100K 다운로드·변환이 완료되어 경로 수정이나 `prepare` 재실행 없이 학습을 시작할 수 있습니다. 최종 점검 결과는 `reports/dataset_ready.json`에서 확인하세요.
+`reports/dataset_ready.json`은 원본 작업 환경의 준비 완료 기록입니다. 새로 clone한 팀원 PC에서는 데이터와 가중치를 위 순서대로 직접 준비하고 `run.cmd check`로 확인하세요. 준비된 뒤 학습을 시작할 수 있습니다.
 
 ```powershell
 .\run.cmd train
@@ -33,7 +125,7 @@ PowerShell에서 이 폴더를 연 다음 실행합니다. 가상환경을 활�
 
 ## 데이터 준비
 
-[BDD100K 공식 다운로드](http://bdd-data.berkeley.edu/download.html)의 **100K Images**와 **Labels** 원본 배포본을 사용합니다. 이 작업에서는 해당 파일을 이미 다운로드했습니다. **Detection 2020 Labels**는 별도 배포본이며 현재 버튼의 잘못된 연결 때문에 사용하지 않았습니다. 동영상, segmentation, tracking 데이터는 이 환경에 필요하지 않습니다.
+[BDD100K 공식 다운로드](http://bdd-data.berkeley.edu/download.html)의 **100K Images**와 **Labels** 원본 배포본을 사용합니다. 원본 작업 환경에서는 해당 파일을 다운로드했지만 새 clone에는 포함되지 않습니다. **Detection 2020 Labels**는 별도 배포본이며 이 프로젝트의 출처 기록에 따르면 당시 버튼이 다른 이미지 ZIP으로 연결되어 사용하지 않았습니다. 동영상, segmentation, tracking 데이터는 이 환경에 필요하지 않습니다.
 
 압축을 풀어 기본 설정과 맞추거나 YAML에 절대 경로를 입력하세요. 다른 드라이브에 데이터를 보관해도 됩니다.
 

@@ -69,6 +69,7 @@ class PipelineTests(unittest.TestCase):
         result=evaluate_predictions(self.root/'coco.json',preds)
         dump(self.root/'metrics.json',result)
         self.assertAlmostEqual(result['mAP50_95'],1.,6)
+        self.assertAlmostEqual(result['mAP75'],1.,6)
         self.assertEqual(result['recall'],1.)
         self.assertEqual(result['precision'],1.)
         self.assertIsNone(result['class_wise'][5]['AP'])

@@ -43,7 +43,7 @@ def evaluate_predictions(annotation_file, predictions, threshold=0.5):
             precision=tp/(tp+fp) if tp+fp else None,
             recall=tp/total if total else None, tp=tp, fp=fp, fn=total-tp, gt=total))
     tp, fp, total = np.sum(list(totals.values()), axis=0).tolist()
-    return dict(mAP50_95=float(ev.stats[0]), mAP50=float(ev.stats[1]), AR100=float(ev.stats[8]),
+    return dict(mAP50_95=float(ev.stats[0]), mAP50=float(ev.stats[1]), mAP75=float(ev.stats[2]), AR100=float(ev.stats[8]),
         precision=tp/(tp+fp) if tp+fp else None, recall=tp/total if total else None,
         class_wise=rows, protocol=dict(evaluator='pycocotools bbox', IoU='0.50:0.05:0.95',
         maxDets=[1,10,100], score_threshold=threshold, precision_recall_IoU=0.5,

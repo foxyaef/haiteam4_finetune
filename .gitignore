@@ -4,4 +4,7 @@ weights/
 runs/
 __pycache__/
 *.pyc
+vendor/
+*.pth
+*.pt
 

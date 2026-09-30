@@ -1,5 +1,7 @@
 # COCO 사전학습 RT-DETR R50 양자화 실험
 
+**이번 프로젝트의 평가 환경은 Google Colab입니다.** 로컬에서 [`export_coco_artifact.py`](scripts/export_coco_artifact.py)로 양자화 모델 `.pth` 하나를 만든 뒤, [Colab에서 노트북 열기](https://colab.research.google.com/github/foxyaef/haiteam4_finetune/blob/main/colab/RTDETR_COCO_Eval.ipynb)를 눌러 파일을 올리면 같은 세션에서 FP32와 모델을 평가하고 결과 ZIP을 내려받습니다. 로컬에서 `python scripts/analyze_colab.py <다운로드한 ZIP>`으로 정확도·시간·메모리를 비교합니다. 설치, 명령, 지표 해석은 [코랩 실행 안내](docs/COLAB_WORKFLOW.md)에 있습니다. 현재 형식은 **fake PTQ 정확도 실험용**이며 실제 INT4 정수 가속을 측정하지 않습니다.
+
 공식 **RT-DETR v1 R50-vd의 COCO 사전학습 모델을 그대로** 사용합니다. BDD100K 파인튜닝이나 체크포인트 재학습은 이번 실험에 없습니다. FP32와 구성요소별 W8A8·W6A6·W4A4의 **정확도 변화**를 같은 이미지에서 비교합니다. 현재 저비트 코드는 *fake quantization*이므로 실제 INT4 추론 속도나 모델 압축률을 보여주지는 않습니다.
 
 ## 처음 실행하는 순서
@@ -53,8 +55,8 @@ Calibration 512장과 평가 1,000장은 **서로 겹치지 않는 COCO val2017 
 
 주 지표는 **mAP50:95와 FP32 대비 ΔAP point**입니다. AP50, AP75, 클래스별 AP도 함께 봅니다. 가중치는 출력 채널별 대칭 MinMax, 활성값은 텐서별 비대칭 MinMax로 처리하고, 실제 호출된 `Conv2d`·`Linear`만 양자화합니다. Attention의 functional MatMul, 정규화, softmax, deformable sampling 등은 FP32에 남습니다. 이 범위를 벗어난 "전체 모델 INT4"라고 해석하지 마세요.
 
-## 라즈베리파이에서 확인할 것
+## 코랩에서 추가로 측정할 것
 
-현재 PC 코드는 **정확도 민감도** 실험입니다. Pi에서 실용성을 비교하려면 실제 배포 형식/런타임을 마련하고 동일 장치에서 **지연시간 p50·p95, 지속 FPS, peak RSS·스왑/OOM, 온도·throttling, 전력/이미지**를 추가 측정해야 합니다. RAM 2GB에서는 특히 모델 적재 성공과 스왑 여부가 중요합니다. [측정 계획](docs/PI_EVALUATION.md)
+코랩 노트북은 같은 세션의 FP32와 양자화 조건에 대해 **추론시간 p50·p95, 관측 FPS, 최대 프로세스 RSS, CUDA 최대 할당·예약 메모리**를 기록합니다. 코랩 GPU와 PyTorch 버전도 함께 저장해 비교 조건을 확인합니다. 시간·메모리는 이 fake PTQ 구현을 코랩에서 실행한 값입니다.
 
 [RT-DETR 내부 구조](docs/RTDETR_STRUCTURE.md)에는 Backbone·Hybrid Encoder·Decoder·Head의 연산 흐름과 양자화 경계를 설명했습니다. 기존 BDD100K 파인튜닝 파일(`download_bdd100k.py`, `run.cmd`, `phase1.cmd` 등)은 이전 실험 재현을 위해 남겨두었지만 **이번 COCO 실험의 실행 경로가 아닙니다**. 데이터·가중치는 Git에 포함되지 않으며 [COCO 이용 조건](https://cocodataset.org/#termsofuse)을 확인하세요.

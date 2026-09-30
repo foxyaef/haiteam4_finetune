@@ -71,7 +71,7 @@ def quantize_weight(weight, bits):
     return torch.fake_quantize_per_channel_affine(weight, scales, zero, 0, qmin, qmax)
 
 
-def install(model, modules, ranges, bits):
+def install(model, modules, ranges, bits, weight_already_quantized=False):
     """Install fake quantization on observed modules; return a coverage report."""
     missing = set(modules) - set(ranges)
     report = {'selected_modules': len(modules), 'observed_modules': len(ranges),
@@ -83,7 +83,7 @@ def install(model, modules, ranges, bits):
         module = modules[name]
         scale, zero, qmin, qmax = activation_qparams((lo, hi), bits)
         # Precompute the quantized floating tensor; inference still computes in FP32.
-        weight = quantize_weight(module.weight.detach(), bits)
+        weight = module.weight.detach() if weight_already_quantized else quantize_weight(module.weight.detach(), bits)
         if isinstance(module, nn.Conv2d):
             def forward(self, x, _weight=weight, _scale=scale, _zero=zero,
                         _qmin=qmin, _qmax=qmax):

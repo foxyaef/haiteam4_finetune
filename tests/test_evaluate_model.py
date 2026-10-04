@@ -59,9 +59,15 @@ class ModelEvaluationTests(unittest.TestCase):
             model = root / 'fp32.onnx'
             make_model(model)
             with patch.object(evaluate_model, 'ROOT', root), patch.object(evaluate_model.prepare_data, 'verify'):
-                metrics = evaluate_model.evaluate(model, root / 'result', preview_count=1)
+                metrics = evaluate_model.evaluate(model, root / 'result', preview_count=1, repeats=3)
+                partial = evaluate_model.evaluate(model, root / 'partial', max_images=1)
             self.assertAlmostEqual(metrics['mAP50_95'], 1.0)
-            self.assertEqual(metrics['resource']['inference_images_timed'], 1)
+            self.assertEqual(metrics['resource']['inference_images_timed'], 2)
+            self.assertEqual(metrics['resource']['inference_runs_timed'], 6)
+            self.assertAlmostEqual(partial['mAP50_95'], 1.0)
+            self.assertFalse(partial['full_evaluation'])
+            self.assertEqual(partial['resource']['inference_runs_timed'], 1)
+            self.assertEqual(len(json.loads((root / 'partial/predictions.json').read_text())), 1)
             self.assertEqual(metrics['resource']['model_file_bytes'], model.stat().st_size)
             self.assertGreater(metrics['resource']['rss_peak_bytes'], 0)
             self.assertEqual(len(json.loads((root / 'result/predictions.json').read_text())), 2)

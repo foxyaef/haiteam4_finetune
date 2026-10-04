@@ -198,15 +198,16 @@ def prepare():
     verify()
 
 
-def verify():
-    manifest = json.loads((DATA / 'manifest.json').read_text(encoding='utf-8'))
+def verify(data_dir=None):
+    data = Path(data_dir) if data_dir is not None else DATA
+    manifest = json.loads((data / 'manifest.json').read_text(encoding='utf-8'))
     if any(manifest.get(key) != PROTOCOL[key] for key in
            ('model', 'source_split', 'seed', 'calibration_images', 'evaluation_images')):
         raise ValueError('COCO subset differs from protocol.json')
     if manifest['archive_sha256'] != {name: spec['sha256'] for name, spec in ARCHIVES.items()}:
         raise ValueError('COCO archive lock differs from the project')
     for name, expected_count in [('calibration', CALIBRATION_COUNT), ('evaluation', EVALUATION_COUNT)]:
-        annotation_path = DATA / 'annotations' / f'{name}.json'
+        annotation_path = data / 'annotations' / f'{name}.json'
         subset = json.loads(annotation_path.read_text(encoding='utf-8'))
         images = subset['images']
         if len(images) != expected_count or len(subset['categories']) != 80:
@@ -217,10 +218,10 @@ def verify():
         if hashlib.sha256('\n'.join(image['file_name'] for image in images).encode()).hexdigest() != expected['files_sha256']:
             raise ValueError(f'{name} image list changed')
         for image in images:
-            if not (DATA / 'val2017' / image['file_name']).is_file():
+            if not (data / 'val2017' / image['file_name']).is_file():
                 raise FileNotFoundError(image['file_name'])
-    calibration = {image['id'] for image in json.loads((DATA / 'annotations/calibration.json').read_text())['images']}
-    evaluation = {image['id'] for image in json.loads((DATA / 'annotations/evaluation.json').read_text())['images']}
+    calibration = {image['id'] for image in json.loads((data / 'annotations/calibration.json').read_text())['images']}
+    evaluation = {image['id'] for image in json.loads((data / 'annotations/evaluation.json').read_text())['images']}
     if calibration & evaluation:
         raise ValueError('Calibration/evaluation overlap')
     print('COCO data ready: val 512 calibration + 1,000 evaluation images')
@@ -231,9 +232,13 @@ def verify():
 
 
 def main(argv=None):
+    global DATA
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--verify-only', action='store_true', help='Check an existing prepared COCO subset')
+    parser.add_argument('--data-dir', type=Path, help='Shared COCO directory; defaults to data/coco')
     args = parser.parse_args(argv)
+    if args.data_dir is not None:
+        DATA = args.data_dir.resolve()
     verify() if args.verify_only else prepare()
 
 

@@ -1,4 +1,6 @@
 """Inspect ONNX quantization evidence; names and declared bit widths are not proof."""
+import argparse
+import json
 from collections import Counter
 
 import onnx
@@ -31,7 +33,15 @@ def inspect_model(path):
         'int8_integer_op_count': int8_ops,
         'qdq_node_count': qdq,
         'int4_initializer_count': int4_types,
-        'has_int8_evidence': bool(int8_ops or qdq or dtypes['INT8'] or dtypes['UINT8']),
+        # INT4 also uses DequantizeLinear. Q/DQ nodes alone do not prove INT8.
+        'has_int8_evidence': bool(int8_ops or dtypes['INT8'] or dtypes['UINT8']),
         'has_int4_evidence': bool(4 in bits or int4_types),
         'interpretation': 'Graph evidence only; does not prove every component or activation uses the claimed precision.',
     }
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--model', required=True)
+    args = parser.parse_args()
+    print(json.dumps(inspect_model(args.model), allow_nan=False))

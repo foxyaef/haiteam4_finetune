@@ -7,7 +7,7 @@ def valid_mean(values):
     valid = values[values >= 0]
     return float(valid.mean()) if valid.size else None
 
-def evaluate_predictions(annotation_file, predictions, threshold=0.5):
+def evaluate_predictions(annotation_file, predictions, threshold=0.5, image_ids=None):
     gt = COCO(str(annotation_file))
     if predictions:
         dt = gt.loadRes(predictions)
@@ -16,6 +16,11 @@ def evaluate_predictions(annotation_file, predictions, threshold=0.5):
         dt.dataset = dict(images=gt.dataset['images'], categories=gt.dataset['categories'], annotations=[])
         dt.createIndex()
     ev = COCOeval(gt, dt, 'bbox')
+    if image_ids is not None:
+        selected_ids = sorted(set(image_ids))
+        if not selected_ids or not set(selected_ids) <= set(gt.getImgIds()):
+            raise ValueError('Evaluation image IDs must be a nonempty subset of the annotations')
+        ev.params.imgIds = selected_ids
     ev.params.maxDets = [1, 10, 100]
     ev.evaluate()
     ev.accumulate()

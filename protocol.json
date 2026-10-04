@@ -13,5 +13,9 @@
   "score_threshold_for_precision_recall": 0.5,
   "runtime_batch_size": 1,
   "runtime_warmup_images": 10,
+  "runtime_warmup_policy": "separate pass, followed by timing all evaluation images",
+  "runtime_latency_repeats_default": 1,
+  "runtime_cpu_threads_default": 4,
+  "runtime_cuda_tf32": false,
   "runtime_latency_percentiles": [50, 95]
 }
